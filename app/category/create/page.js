@@ -1,4 +1,5 @@
 'use client';
+
 import Container from "@components/Container";
 import CategoryForm from "@components/category/CategoryForm";
 import { useRouter } from "next/navigation";
@@ -6,8 +7,7 @@ import { categoryDefault } from "@constants/defaults";
 import { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { setNotification } from '@/store/notificationSlice';
-import { createCategory } from "@lib/categoryService";
-
+import { createCategory } from "@lib/services/categoryService";
 
 const CreateCategory = () => {
     const router = useRouter();

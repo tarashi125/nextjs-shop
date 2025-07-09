@@ -5,7 +5,7 @@ import Container from "@components/Container";
 import { useDispatch } from 'react-redux';
 import { setNotification } from '@/store/notificationSlice';
 import Link from "next/link";
-import { fetchCategory, deleteCategory } from "@lib/categoryService";
+import { fetchCategory, deleteCategory } from "@lib/services/categoryService";
 import { DeleteOutlined, EditOutlined, UnorderedListOutlined } from '@ant-design/icons';
 
 const CategoryPage = () => {

@@ -1,8 +1,8 @@
 'use client';
-import Link from 'next/link';
+
 import { useEffect, useState } from "react";
 import {Form, Input, InputNumber, Select, Button, Typography} from 'antd';
-import { fetchCategory } from "@lib/categoryService";
+import { fetchCategory } from "@lib/services/categoryService";
 
 const { Title } = Typography;
 

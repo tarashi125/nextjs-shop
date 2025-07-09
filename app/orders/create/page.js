@@ -6,8 +6,8 @@ import { orderDefault } from "@constants/defaults";
 import { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { setNotification } from '@/store/notificationSlice';
-import {fetchProduct} from "@lib/productService";
-import {createOrder} from "@lib/orderService";
+import {fetchProduct} from "@lib/services/productService";
+import {createOrder} from "@lib/services/orderService";
 import {useSession} from "next-auth/react";
 
 const CreateOrder = () => {

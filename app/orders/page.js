@@ -4,9 +4,9 @@ import { formatTime, formatCurrency } from '@/lib/utils';
 import Container from "@components/Container";
 import OrderFilter from "@components/order/OrderFilter";
 import Link from "next/link";
-import {Button, Popconfirm, Table, Tag} from "antd";
+import {Button, Popconfirm, Table, Tag, Descriptions} from "antd";
 import { DeleteOutlined, EditOutlined, BookOutlined ,EyeOutlined, RollbackOutlined } from '@ant-design/icons';
-import { fetchOrders, updateOrder } from '@lib/orderService';
+import { fetchOrders, updateOrder } from '@lib/services/orderService';
 import { useDispatch } from 'react-redux';
 import { setNotification } from '@/store/notificationSlice';
 import dayjs from "dayjs";
@@ -21,9 +21,9 @@ const OrdersPage = () => {
         const today = dayjs();
         return {
             status: 'all',
-            date: today,
-            startDate: today.startOf('day').toISOString(),
-            endDate: today.endOf('day').toISOString(),
+            date: '',
+            startDate: '',
+            endDate: '',
         };
     });
 
@@ -117,11 +117,6 @@ const OrdersPage = () => {
                 <div className={`flex gap-4`}>
                     { record.status !== 'trash' ? (
                         <>
-                            <Link href={`/orders/${record._id}`}>
-                                <Button type="primary" icon={<EyeOutlined />}>
-                                    View
-                                </Button>
-                            </Link>
                             <Link href={`/orders/edit/?id=${record._id}`}>
                                 <Button
                                     color="primary"
@@ -181,6 +176,27 @@ const OrdersPage = () => {
                 dataSource={orders}
                 rowKey="_id"
                 loading={loading}
+                expandable={{
+                    expandedRowRender: (record) => (
+                        <Descriptions
+                            size="small"
+                            column={1}
+                            bordered
+                            title="Item details"
+                            className="bg-gray-50"
+                        >
+                            {record.description && (<Descriptions.Item label="Descriptions"> {record.description}</Descriptions.Item>)}
+                            <Descriptions.Item label="Items">
+                                {record.items?.map((item) => (
+                                    <div key={item._id}>
+                                    • {item.name} × {item.qty}
+                                    </div>
+                                ))}
+                            </Descriptions.Item>
+                        </Descriptions>
+                    ),
+                    rowExpandable: (record) => record.items?.length > 0
+                }}
             />
 
         </Container>

@@ -33,7 +33,7 @@ const OrderFilter = ({params, setParams}) => {
     return (
         <div className={'flex gap-4 mb-5'}>
             <DatePicker
-                defaultValue={params.date}
+                defaultValue={params?.date}
                 onChange={handleDateChange}
             />
             <Select

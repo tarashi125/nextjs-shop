@@ -5,8 +5,8 @@ import Container from "@components/Container";
 import { useDispatch } from 'react-redux';
 import { setNotification } from '@/store/notificationSlice';
 import Link from "next/link";
-import {fetchProduct} from "@lib/productService";
-import { fetchCategory } from "@lib/categoryService";
+import {fetchProduct} from "@lib/services/productService";
+import { fetchCategory } from "@lib/services/categoryService";
 import {formatCurrency} from "@lib/utils";
 import { DeleteOutlined, EditOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 

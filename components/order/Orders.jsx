@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import dayjs from "dayjs";
 import OrderCard from "@components/order/OrderCard";
 import OrderFilter from "@components/order/OrderFilter";
-import { fetchOrders } from '@lib/orderService';
+import { fetchOrders } from '@lib/services/orderService';
 import {Button, Space} from "antd";
 import {BookOutlined} from "@ant-design/icons";
 import Link from "next/link";

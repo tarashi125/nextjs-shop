@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { productDefault } from "@constants/defaults";
 import { useDispatch } from 'react-redux';
 import { setNotification } from '@/store/notificationSlice';
-import { fetchProductById, updateProduct } from '@lib/productService';
+import { fetchProductById, updateProduct } from '@lib/services/productService';
 
 const EditProduct = () => {
     const router = useRouter();
