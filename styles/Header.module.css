@@ -1,0 +1,48 @@
+
+.logo {
+    display: inline-block;
+    font-size: 3rem;
+    font-weight: bold;
+    line-height: 1.5;
+    background: linear-gradient(90deg, #5bb0bc, #6f42c1, #EC9BAD, #ffc107);
+    background-size: 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientMove 4s ease-in-out infinite;
+}
+
+.logo:hover {
+    opacity: 0.8;
+    transform: scale(1.03);
+    transition: all 0.2s ease-in-out;
+}
+
+.hr {
+    height: 2px;
+    background: linear-gradient(90deg, #5bb0bc, #6f42c1, #EC9BAD, #ffc107);
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navFixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+  
+.navHidden {
+    transform: translateY(-100%);
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0 center; }
+    25% { background-position: 50% center; }
+    50% { background-position: 100% center; }
+    75% { background-position: 50% center; }
+    100% { background-position: 0 center; }
+}
