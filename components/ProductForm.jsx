@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import {Form, Input, InputNumber, Select, Button, Typography} from 'antd';
-import { fetchCategory } from "@lib/services/categoryService";
+import { fetchCategory } from "@/lib/services/categoryService";
 
 const { Title } = Typography;
 

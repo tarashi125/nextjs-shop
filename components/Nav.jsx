@@ -10,10 +10,10 @@ import {
     BookOutlined,
     UnorderedListOutlined,
 } from '@ant-design/icons';
-import Container from '@components/Container';
+import Container from '@/components/Container';
 import Link from 'next/link';
 import clsx from 'clsx';
-import styles from '@styles/Header.module.css';
+import styles from '@/styles/Header.module.css';
 
 const items = [
     { key: 'orders', label: <Link href="/orders">Orders</Link>, icon: <BookOutlined /> },

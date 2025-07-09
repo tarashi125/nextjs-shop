@@ -1,11 +1,11 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { Table, Button, Popconfirm, Modal, Form, Input } from 'antd';
-import Container from "@components/Container";
+import Container from "@/components/Container";
 import { useDispatch } from 'react-redux';
 import { setNotification } from '@/store/notificationSlice';
 import Link from "next/link";
-import { fetchCategory, deleteCategory } from "@lib/services/categoryService";
+import { fetchCategory, deleteCategory } from "@/lib/services/categoryService";
 import { DeleteOutlined, EditOutlined, UnorderedListOutlined } from '@ant-design/icons';
 
 const CategoryPage = () => {

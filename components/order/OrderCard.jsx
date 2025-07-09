@@ -1,8 +1,8 @@
-import { formatTime, formatCurrency } from '@lib/utils'
+import { formatTime, formatCurrency } from '@/lib/utils'
 import { useState } from 'react';
 import Link from "antd/es/typography/Link";
 import {Tag} from "antd";
-import {getStatusColor} from "@constants/defaults";
+import {getStatusColor} from "@/constants/defaults";
 
 export default function OrderCard({ order }) {
     return (

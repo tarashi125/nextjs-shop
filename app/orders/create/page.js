@@ -1,13 +1,13 @@
 'use client';
-import Container from "@components/Container";
-import OrderForm from "@components/order/OrderForm";
+import Container from "@/components/Container";
+import OrderForm from "@/components/order/OrderForm";
 import { useRouter } from "next/navigation";
-import { orderDefault } from "@constants/defaults";
+import { orderDefault } from "@/constants/defaults";
 import { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
 import { setNotification } from '@/store/notificationSlice';
-import {fetchProduct} from "@lib/services/productService";
-import {createOrder} from "@lib/services/orderService";
+import {fetchProduct} from "@/lib/services/productService";
+import {createOrder} from "@/lib/services/orderService";
 import {useSession} from "next-auth/react";
 
 const CreateOrder = () => {

@@ -1,13 +1,13 @@
 'use client';
 
-import Container from "@components/Container";
-import CategoryForm from "@components/category/CategoryForm";
+import Container from "@/components/Container";
+import CategoryForm from "@/components/category/CategoryForm";
 import { message } from "antd";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { productDefault } from "@constants/defaults";
+import { productDefault } from "@/constants/defaults";
 import { redirect } from "next/navigation";
-import { fetchCategoryById, updateCategory } from "@lib/services/categoryService";
+import { fetchCategoryById, updateCategory } from "@/lib/services/categoryService";
 
 const EditCategory = () => {
     const [ category, setCategory ] = useState(productDefault);

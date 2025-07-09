@@ -1,13 +1,13 @@
 'use client';
 import { useEffect, useState } from 'react';
-import Container from '@components/Container';
-import OrderForm from '@components/order/OrderForm';
-import { orderDefault } from '@constants/defaults';
+import Container from '@/components/Container';
+import OrderForm from '@/components/order/OrderForm';
+import { orderDefault } from '@/constants/defaults';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 import { setNotification } from '@/store/notificationSlice';
-import { fetchOrderById, updateOrder } from '@lib/services/orderService';
-import { fetchProduct } from '@lib/services/productService';
+import { fetchOrderById, updateOrder } from '@/lib/services/orderService';
+import { fetchProduct } from '@/lib/services/productService';
 
 const EditOrder = () => {
     const router = useRouter();

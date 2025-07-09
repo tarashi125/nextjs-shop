@@ -1,16 +1,16 @@
 'use client'
 import { useState, useEffect } from "react";
 import { formatTime, formatCurrency } from '@/lib/utils';
-import Container from "@components/Container";
-import OrderFilter from "@components/order/OrderFilter";
+import Container from "@/components/Container";
+import OrderFilter from "@/components/order/OrderFilter";
 import Link from "next/link";
 import {Button, Popconfirm, Table, Tag, Descriptions} from "antd";
 import { DeleteOutlined, EditOutlined, BookOutlined ,EyeOutlined, RollbackOutlined } from '@ant-design/icons';
-import { fetchOrders, updateOrder } from '@lib/services/orderService';
+import { fetchOrders, updateOrder } from '@/lib/services/orderService';
 import { useDispatch } from 'react-redux';
 import { setNotification } from '@/store/notificationSlice';
 import dayjs from "dayjs";
-import {getStatusColor} from "@constants/defaults";
+import {getStatusColor} from "@/constants/defaults";
 
 
 const OrdersPage = () => {

@@ -14,8 +14,8 @@ import {
 } from 'antd';
 import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import { useForm, useWatch } from 'antd/es/form/Form';
-import { formatCurrency } from '@lib/utils';
-import {orderStatus, getStatusColor} from "@constants/defaults";
+import { formatCurrency } from '@/lib/utils';
+import {orderStatus, getStatusColor} from "@/constants/defaults";
 
 const { Option } = Select;
 const { Title, Text } = Typography;

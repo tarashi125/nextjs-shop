@@ -1,8 +1,8 @@
 'use client'
 import { useSession } from "next-auth/react";
-import Container from "@components/Container";
-import LoginPage from "@components/LoginPage";
-import Orders from "@components/order/Orders";
+import Container from "@/components/Container";
+import LoginPage from "@/components/LoginPage";
+import Orders from "@/components/order/Orders";
 
 
 const Home = () => {

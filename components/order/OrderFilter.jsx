@@ -1,5 +1,5 @@
 import {DatePicker, Select} from 'antd';
-import { orderStatus } from '@constants/defaults'
+import { orderStatus } from '@/constants/defaults'
 
 const OrderFilter = ({params, setParams}) => {
 

@@ -1,8 +1,8 @@
 import '@styles/global.css';
 import '@ant-design/v5-patch-for-react-19';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
-import Provider from "@components/Provider";
-import Nav from "@components/Nav";
+import Provider from "@/components/Provider";
+import Nav from "@/components/Nav";
 
 
 export const metadata = {

@@ -1,13 +1,13 @@
 'use client';
 
-import Container from "@components/Container";
-import ProductForm from "@components/ProductForm";
+import Container from "@/components/Container";
+import ProductForm from "@/components/ProductForm";
 import { useRouter } from "next/navigation";
-import { productDefault } from "@constants/defaults";
+import { productDefault } from "@/constants/defaults";
 import { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { setNotification } from '@/store/notificationSlice';
-import { createProduct } from '@lib/services/productService'
+import { createProduct } from '@/lib/services/productService'
 
 
 const CreateProduct = () => {
