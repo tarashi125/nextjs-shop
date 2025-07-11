@@ -20,9 +20,9 @@ const EditCategory = () => {
 
     const [category, setCategory] = useState<Category>(createDefaultCategory());
 
-    const categoryId = searchParams.get('id');
+    const categoryId = searchParams.get('id') as string;
 
-    useEffect( ()=> {
+    useEffect(() => {
         if (!categoryId || categoryId === 'null' || categoryId === 'undefined') {
             dispatch(
                 setNotification({
@@ -54,7 +54,7 @@ const EditCategory = () => {
 
     const handleEditCategory = async (values: Category) => {
         try {
-            await updateCategory(categoryId, values );
+            await updateCategory(categoryId, values);
             dispatch(
                 setNotification({
                     type: 'success',
@@ -67,7 +67,7 @@ const EditCategory = () => {
                 setNotification({
                     type: 'error',
                     message: 'Error editing category!',
-                    description: error?.message ||'',
+                    description: error?.message || '',
                 })
             );
         }

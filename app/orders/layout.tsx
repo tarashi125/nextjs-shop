@@ -1,6 +1,9 @@
+import type { ReactNode } from 'react';
 
-export default  async function OrderLayout({children}) {
-    return (
-        <>{children}</>
-    );
+interface OrderLayoutProps {
+    children: ReactNode;
+}
+
+export default async function OrderLayout({ children }: OrderLayoutProps) {
+    return <>{children}</>;
 }

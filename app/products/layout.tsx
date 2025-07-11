@@ -1,6 +1,9 @@
+import type { ReactNode } from 'react';
 
-export default async function ProductLayout({children}) {
-    return (
-        <>{children}</>
-    );
+interface ProductLayoutProps {
+    children: ReactNode;
+}
+
+export default async function ProductLayout({ children }: ProductLayoutProps) {
+    return <>{children}</>;
 }
