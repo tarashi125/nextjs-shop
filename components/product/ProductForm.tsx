@@ -29,14 +29,14 @@ const ProductForm = ({
 }: IProps) => {
     const [form]  = Form.useForm<Product>();
     const [options, setOptions] = useState<CategoryOption[]>([]);
-    const { t } = useTranslation();
+    const { t } = useTranslation('common');
 
     useEffect(() => {
         const loadOptions = async () => {
             const categories = await fetchCategory();
             const mapped: CategoryOption[] = categories.map((c: Category) => ({
                 label: c.name,
-                value: c._id,
+                value: c._id!,
             }));
             setOptions(mapped);
         };

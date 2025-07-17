@@ -11,7 +11,7 @@ interface IProps {
 }
 
 const OrderFilter = ({params, setParams}: IProps) => {
-    const { t } = useTranslation();
+    const { t } = useTranslation('common');
 
     const handleDateChange = (date: Dayjs | null) => {
         if (!date) {

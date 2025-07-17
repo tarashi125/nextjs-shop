@@ -6,7 +6,7 @@ import { Switch } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 const LanguageSwitcher = () => {
-    const { t } = useTranslation();
+    const { t } = useTranslation('common');
     const [enabled, setEnabled] = useState(false);
 
     useEffect(() => {

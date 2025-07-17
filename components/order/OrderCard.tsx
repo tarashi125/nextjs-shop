@@ -11,7 +11,7 @@ interface IProps {
 }
 
 export default function OrderCard({ order }: IProps) {
-    const { t } = useTranslation();
+    const { t } = useTranslation('common');
     return (
         <Link href={`orders/edit?id=${order._id}`}>
             <div className="break-inside-avoid rounded-xl border border-gray-200 bg-white shadow-sm hover:shadow-md p-6 mb-4 space-y-6 transition duration-150 ease-in-out cursor-pointer">
@@ -25,7 +25,7 @@ export default function OrderCard({ order }: IProps) {
                     </Tag>
                     <div className="mt-3">
                         <h3 className="text-xl font-semibold text-gray-800" style={{margin: 0}}>#{order.title}</h3>
-                        <p className="text-sm text-gray-500" style={{margin: 0}}>{t('order.card.time')}: {formatTime(order.createdAt)}</p>
+                        <p className="text-sm text-gray-500" style={{margin: 0}}>{t('order.card.time')}: {formatTime(order.createdAt!)}</p>
                     </div>
                 </div>
 

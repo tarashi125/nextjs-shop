@@ -25,7 +25,7 @@ export default function RegisterForm({ setFormShowing }: IProps) {
     const dispatch = useDispatch<AppDispatch>();
     const [form] = Form.useForm<RegisterFormFields>();
     const [submitting, setSubmitting] = useState<boolean>(false);
-    const { t } = useTranslation();
+    const { t } = useTranslation('common');
 
     const handleRegister = async (values: RegisterFormFields) => {
         setSubmitting(true);

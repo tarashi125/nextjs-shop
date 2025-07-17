@@ -23,7 +23,7 @@ export default function LoginForm({ setFormShowing }: IProps) {
     const dispatch = useDispatch<AppDispatch>();
     const [form] = Form.useForm<LoginFormFields>();
     const [submitting, setSubmitting] = useState<boolean>(false);
-    const { t } = useTranslation();
+    const { t } = useTranslation('common');
 
     const handleRegister = async (values: LoginFormFields) => {
         setSubmitting(true);

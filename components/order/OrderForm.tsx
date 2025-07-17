@@ -37,7 +37,7 @@ interface OrderFormValues {
 interface IProps {
     type: string;
     order: Order;
-    setOrder: (p: (pre) => any) => void;
+    setOrder: (p: (pre: Order) => any) => void;
     submitting: boolean;
     handleCancel: () => void;
     handleSubmit: () => void;
@@ -53,7 +53,7 @@ const OrderForm= ({
      handleSubmit,
      products,
 } : IProps ) => {
-    const { t } = useTranslation();
+    const { t } = useTranslation('common');
     const [form] = useForm<Order>();
 
     const title = useWatch('title', form);
@@ -171,7 +171,7 @@ const OrderForm= ({
                             title: t('order.form_items.name.title'),
                             dataIndex: 'name',
                             width: '25%',
-                            render: (_, __, index: number) => {
+                            render: (_: any, __: any, index: number) => {
                                 const currentType = form.getFieldValue(['items', index, 'type']) ?? 'select';
                                 return (
                                     <Form.Item style={{ margin: 0 }}
@@ -187,7 +187,7 @@ const OrderForm= ({
                                                 showSearch
                                                 optionFilterProp="children"
                                                 filterOption={(input, option) => {
-                                                    const normalize = (str) =>
+                                                    const normalize = (str: any) =>
                                                         str.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase();
                                                     return normalize(option?.children ?? '').includes(normalize(input));
                                                 }}
@@ -207,7 +207,7 @@ const OrderForm= ({
                             title: t('order.form_items.qty.title'),
                             dataIndex: 'qty',
                             width: '12.5%',
-                            render: (_, __, index) => (
+                            render: (_: any, __: any, index: number) => (
                                 <Form.Item
                                     style={{ margin: 0 }}
                                     name={[index, 'qty']}
@@ -222,7 +222,7 @@ const OrderForm= ({
                             title: t('order.form_items.price.title'),
                             dataIndex: 'price',
                             width: '16,67%',
-                            render: (_, __, index) => (
+                            render: (_: any, __: any, index: number) => (
                                 <Form.Item
                                     style={{ margin: 0 }}
                                     name={[index, 'price']}
@@ -236,7 +236,7 @@ const OrderForm= ({
                             title: t('order.form_items.discount.title'),
                             dataIndex: 'discount',
                             width: '16,67%',
-                            render: (_, __, index) => (
+                            render: (_: any, __: any, index: number) => (
                                 <Form.Item
                                     style={{ margin: 0 }}
                                     name={[index, 'discount']}
@@ -251,7 +251,7 @@ const OrderForm= ({
                             title: t('order.form_items.tax.title'),
                             dataIndex: 'tax',
                             width: '12.5%',
-                            render: (_, __, index) => (
+                            render: (_: any, __: any, index: number) => (
                                 <Form.Item
                                     style={{ margin: 0 }}
                                     name={[index, 'tax']}
@@ -266,7 +266,7 @@ const OrderForm= ({
                             title: t('order.form_items.actions.title'),
                             dataIndex: 'actions',
                             width: '16,67%',
-                            render: (_, __, index) => (
+                            render: (_: any, __: any, index: number) => (
                                 <Popconfirm
                                     title={t('order.form_items.actions.confirm.title')}
                                     okText={t('order.form_items.actions.confirm.ok')}

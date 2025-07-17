@@ -22,7 +22,7 @@ const Nav = () => {
     const { data: session } = useSession();
     const [hidden, setHidden] = useState<boolean>(false);
     const [lastScrollY, setLastScrollY] = useState<number>(0);
-    const { t } = useTranslation();
+    const { t } = useTranslation('common');
 
     const items: MenuProps['items'] = [
         {

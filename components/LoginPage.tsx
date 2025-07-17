@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 export default function LoginPage() {
     const { data: session, status } = useSession();
     const [formShowing, setFormShowing] = useState<string>('login');
-    const { t } = useTranslation();
+    const { t } = useTranslation('common');
 
     if (status !== 'loading' && !session?.user?.id) {
         return (

@@ -21,7 +21,7 @@ const Orders = () => {
             endDate: today.endOf('day').toISOString(),
         };
     });
-    const { t } = useTranslation();
+    const { t } = useTranslation('common');
 
     useEffect(() => {
         const loadOrders = async () => {

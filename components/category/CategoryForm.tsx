@@ -31,7 +31,7 @@ const CategoryForm = ({
     handleSubmit,
 }: IProps) => {
     const [form] = useForm<Category>();
-    const { t } = useTranslation();
+    const { t } = useTranslation('common');
 
     useEffect(() => {
         form.setFieldsValue(category);
