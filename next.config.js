@@ -10,6 +10,10 @@ const nextConfig = {
             topLevelAwait: true,
         }
         return config
+    },
+    i18n: {
+        locales: ['en', 'vi'],
+        defaultLocale: 'vi',
     }
 };
 

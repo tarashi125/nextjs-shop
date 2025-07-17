@@ -27,7 +27,7 @@ export interface OrderItem {
 
 export interface OrderFilterParams {
     status: string;
-    date: Dayjs | null;
-    startDate: string;
-    endDate: string;
+    date?: Dayjs | null;
+    startDate?: string;
+    endDate?: string;
 }
