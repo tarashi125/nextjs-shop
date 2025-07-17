@@ -13,7 +13,7 @@ if (!i18n.isInitialized) {
         .init({
             fallbackLng: 'vi',
             supportedLngs: ['vi', 'en'],
-            debug: process.env.NODE_ENV === 'development',
+            debug: false,//process.env.NODE_ENV === 'development',
             backend: {
                 loadPath: '/locales/{{lng}}/{{ns}}.json',
                 crossDomain: false,
