@@ -1,9 +1,16 @@
-import {Schema} from "mongoose";
+import { Schema, model, models, Document } from "mongoose";
 
-const mongoose = require("mongoose");
 const slugify = require("slugify");
 
-function createSlug(str) {
+export interface IProduct extends Document {
+    _id: string;
+    name: string;
+    slug: string;
+    price: number;
+    category: [];
+}
+
+function createSlug(str: string) {
     return str
         .toLowerCase()
         .normalize("NFD")                     // tách dấu tiếng Việt
@@ -14,7 +21,7 @@ function createSlug(str) {
         .replace(/-+/g, "-");                // loại bỏ dấu - liên tiếp
 }
 
-const ProductSchema = new mongoose.Schema({
+const ProductSchema = new Schema<IProduct>({
     name: {
         type: String,
         required: true,
@@ -46,7 +53,7 @@ ProductSchema.pre("save", async function (next) {
     let count = 1;
 
     // Kiểm tra slug đã tồn tại chưa
-    while (await mongoose.models.Product.findOne({ slug })) {
+    while (await models.Product.findOne({ slug })) {
         slug = `${baseSlug}-${count++}`;
     }
 
@@ -54,4 +61,4 @@ ProductSchema.pre("save", async function (next) {
     next();
 });
 
-export default mongoose.models.Product || mongoose.model('Product', ProductSchema);
+export default models.Product || model('Product', ProductSchema);

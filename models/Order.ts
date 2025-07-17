@@ -1,6 +1,18 @@
-import { Schema, model, models } from "mongoose";
+import {Schema, model, models, Document} from "mongoose";
 
-const OrderSchema = new Schema({
+export interface IOrder extends Document {
+    _id: string;
+    userId: string;
+    title: string;
+    description: string;
+    status: string;
+    total: number;
+    totalDiscount: number;
+    totalTax: number;
+    items: [];
+}
+
+const OrderSchema = new Schema<IOrder>({
     userId: {
         type: Schema.Types.ObjectId,
         ref: "User",
