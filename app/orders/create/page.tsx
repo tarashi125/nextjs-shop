@@ -25,7 +25,7 @@ const CreateOrder = () => {
     const [submitting, setSubmitting] = useState<boolean>(false);
     const [ order, setOrder ] = useState<Order>(createDefaultOrder());
     const [ products, setProducts ] = useState<Product[]>([]);
-    const { t } = useTranslation();
+    const { t } = useTranslation('common');
 
     useEffect(() => {
         const loadProducts = async () => {

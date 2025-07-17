@@ -24,7 +24,7 @@ const ProductsPage = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
     const [filterOptions, setFilterOptions] = useState<{ label: string; value: string }[]>([]);
-    const { t } = useTranslation();
+    const { t } = useTranslation('common');
 
     const loadProducts = async () => {
         setLoading(true);

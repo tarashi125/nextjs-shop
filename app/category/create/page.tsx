@@ -19,7 +19,7 @@ const CreateCategory = () => {
     const dispatch = useDispatch<AppDispatch>();
     const [ category, setCategory ] = useState<Category>(createDefaultCategory());
     const [submitting, setSubmitting] = useState(false);
-    const { t } = useTranslation();
+    const { t } = useTranslation('common');
 
     const handleCreateCategory = async () => {
         setSubmitting(true);

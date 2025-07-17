@@ -19,7 +19,7 @@ const CreateProduct = () => {
     const dispatch = useDispatch<AppDispatch>();
     const [product, setProduct] = useState<Product>(createDefaultProduct());
     const [submitting, setSubmitting] = useState(false);
-    const { t } = useTranslation();
+    const { t } = useTranslation('common');
 
     const handleCreateProduct = async () => {
         setSubmitting(true);

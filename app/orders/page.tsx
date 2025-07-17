@@ -39,7 +39,7 @@ const OrdersPage = () => {
             endDate: '',
         };
     });
-    const { t } = useTranslation();
+    const { t } = useTranslation('common');
 
 
     const loadOrders = async () => {
@@ -124,17 +124,17 @@ const OrdersPage = () => {
             title: t('order.table.total'),
             dataIndex: 'total',
             key: 'total',
-            align: 'right',
+            align: 'right' as 'left' | 'right' | 'center',
             render: (total: number) => formatCurrency(total),
         },
         {
             title: t('order.table.actions.title'),
             key: 'actions',
-            render: (_, record) => (
+            render: (_: any, record: Order) => (
                 <div className="flex gap-4">
                     { record.status !== 'trash' ? (
                         <>
-                            <Link href={`/orders/edit/?id=${record._id}`}>
+                            <Link href={`/orders/edit/?id=${record._id!}`}>
                                 <Button
                                     color="primary"
                                     variant="outlined"
@@ -145,7 +145,7 @@ const OrdersPage = () => {
                             </Link>
                             <Popconfirm
                                 title={t('order.form_delete.confirm.title')}
-                                onConfirm={() => handleDeleteOrder(record._id)}
+                                onConfirm={() => handleDeleteOrder(record._id!)}
                                 okText={t('order.form_delete.confirm.ok')}
                                 cancelText={t('order.form_delete.confirm.cancel')}
                             >
@@ -159,7 +159,7 @@ const OrdersPage = () => {
                             color="primary"
                             variant="outlined"
                             icon={<RollbackOutlined />}
-                            onClick={() => handleRestoreOrder(record._id)}
+                            onClick={() => handleRestoreOrder(record._id!)}
                         >
                             {t('order.table.actions.restore')}
                         </Button>
@@ -189,11 +189,11 @@ const OrdersPage = () => {
                 setParams={setParams}
             />
 
-            <Table
+            <Table<Order>
                 bordered
+                rowKey="_id"
                 columns={columns}
                 dataSource={orders}
-                rowKey="_id"
                 loading={loading}
                 expandable={{
                     expandedRowRender: (record) => (

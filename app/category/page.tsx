@@ -18,7 +18,7 @@ const CategoryPage = () => {
     const dispatch = useDispatch<AppDispatch>();
     const [categories, setCategories] = useState<Category[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
-    const { t } = useTranslation();
+    const { t } = useTranslation('common');
 
     const loadCategory = async () => {
         setLoading(true);
@@ -60,7 +60,7 @@ const CategoryPage = () => {
         {
             title: t('category.table.actions.title'),
             key: 'actions',
-            render: (_, record) => (
+            render: (_: any, record: Category) => (
                 <div className="flex gap-4">
                     <Link href={`/category/edit/?id=${record._id}`}>
                         <Button color="primary" variant="outlined" icon={<EditOutlined />}>
@@ -100,8 +100,8 @@ const CategoryPage = () => {
             <Table<Category>
                 bordered
                 rowKey="_id"
-                dataSource={categories}
                 columns={columns}
+                dataSource={categories}
                 loading={loading}
             />
         </Container>

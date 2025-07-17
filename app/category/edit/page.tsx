@@ -22,7 +22,7 @@ const EditCategory = () => {
     const [submitting, setSubmitting] = useState(false);
     const [category, setCategory] = useState<Category>(createDefaultCategory());
     const categoryId = searchParams.get('id') as string;
-    const { t } = useTranslation();
+    const { t } = useTranslation('common');
 
     useEffect(() => {
         setSubmitting(true);

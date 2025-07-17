@@ -22,7 +22,7 @@ const EditProduct = () => {
     const [submitting, setSubmitting] = useState<boolean>(false);
     const [product, setProduct] = useState<Product>(createDefaultProduct());
     const productId = searchParams.get('id') as string;
-    const { t } = useTranslation();
+    const { t } = useTranslation('common');
 
     useEffect( ()=> {
         const loadProduct = async () => {
