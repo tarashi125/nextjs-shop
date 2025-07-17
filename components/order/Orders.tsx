@@ -6,6 +6,7 @@ import { fetchOrders } from '@/lib/services/orderService';
 import { Button, Space } from 'antd';
 import { BookOutlined } from '@ant-design/icons';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 
 import type { Order, OrderFilterParams } from '@/types/order';
 
@@ -20,6 +21,7 @@ const Orders = () => {
             endDate: today.endOf('day').toISOString(),
         };
     });
+    const { t } = useTranslation();
 
     useEffect(() => {
         const loadOrders = async () => {
@@ -47,7 +49,7 @@ const Orders = () => {
                         type="primary"
                         icon={<BookOutlined />}
                     >
-                        Add Order
+                        {t('order.page_add')}
                     </Button>
                 </Link>
 

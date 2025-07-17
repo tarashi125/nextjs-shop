@@ -1,9 +1,11 @@
-export const orderStatus = {
-    'processing': "Processing",
-    'completed': "Completed",
-    'pending': "Pending",
-    'trash': 'Trash',
-}
+type OrderStatus = 'processing' | 'completed' | 'pending' | 'trash';
+
+export const orderStatus: OrderStatus[] = [
+    'processing',
+    'completed',
+    'pending',
+    'trash',
+]
 
 export const getStatusColor = (status) => {
     switch (status) {

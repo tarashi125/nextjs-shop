@@ -1,0 +1,283 @@
+{
+    "language": "Ngôn ngữ",
+    "switchLanguage": "Đổi ngôn ngữ",
+    "login_form" : {
+        "login": "Đăng nhập",
+        "note": "hoặc",
+        "dk": "Đăng ký ngay!",
+        "username": {
+            "title": "Tên đăng nhập!",
+            "required": "Vui lòng nhập tên đăng nhập!"
+        },
+        "password": {
+            "title": "Mật khẩu",
+            "required": "Vui lòng nhập mật khẩu!"
+        },
+        "message" : {
+            "success": "Đăng nhập thành công!",
+            "failed": "Đăng nhập thất bại!",
+            "error": "Đã xảy ra lỗi không mong muốn!"
+        }
+    },
+    "register_form" : {
+        "register": "Đăng ký",
+        "note": "Đã có tài khoản?",
+        "dk": "Đăng nhập ngay!",
+        "username": {
+            "title": "Tên đăng nhập",
+            "required": "Vui lòng nhập tên đăng nhập!"
+        },
+        "name": {
+            "title": "Tên bạn",
+            "required": "Vui lòng nhập tên của bạn!"
+        },
+        "password": {
+            "title": "Mật khẩu",
+            "required": "Vui lòng nhập mật khẩu!",
+            "min": "Mật khẩu cần có ít nhất 6 chữ cái"
+        },
+        "confirm_password": {
+            "title": "Mật khẩu xác nhận",
+            "required": "Vui lòng nhập mật khẩu xác nhận!",
+            "validate": "Mật khẩu không trùng khớp!"
+        },
+        "message" : {
+            "success": "Đăng ký thành công!",
+            "failed": "Đăng ký thất bại!",
+            "error": "Đã xảy ra lỗi không mong muốn!"
+        }
+    },
+    "login_page": {
+        "login": "Đăng nhập",
+        "register": "Đăng ký"
+    },
+    "nav" : {
+        "orders": "Đơn hàng",
+        "products": "Sản phẩm",
+        "categories": "Danh mục",
+        "logout": "Đăng xuất"
+    },
+    "product": {
+        "page_title": "Sản phẩm",
+        "page_add": "Thêm sản phẩm",
+        "page_filter": "Lọc theo danh mục",
+        "form_title": "Sản phẩm",
+        "load_failed": "Lỗi khi tải sản phẩm!",
+        "table": {
+            "name": "Tên",
+            "price": "Giá",
+            "actions" : {
+                "title": "Hành động",
+                "edit": "Sửa",
+                "delete": "Xoá"
+            }
+        },
+        "form_name": {
+            "title": "Tên",
+            "required": "Vui lòng nhập tên sản phẩm!"
+        },
+        "form_price": {
+            "title": "Giá",
+            "required": "Vui lòng nhập giá sản phẩm!"
+        },
+        "form_category": {
+            "title" :  "Danh mục",
+            "required": "Vui lòng chọn danh mục!"
+        },
+        "form_cancel": {
+            "title": "Huỷ"
+        },
+        "form_create": {
+            "title":  "Tạo",
+            "success": "Tạo sản phẩm thành công!",
+            "failed": "Tạo sản phẩm thất bại!"
+        },
+        "form_edit": {
+            "title":  "Sửa",
+            "success": "Cập nhật sản phẩm thành công!",
+            "failed": "Cập nhật sản phẩm thất bại!"
+        },
+        "form_delete": {
+            "success": "Xoá sản phẩm thành công!",
+            "failed": "Xoá sản phẩm thất bại!",
+            "confirm": {
+                "title": "Bạn muốn xoá sản phẩm này không?",
+                "ok": "Xoá",
+                "cancel": "Huỷ"
+            }
+        }
+    },
+    "category": {
+        "page_title": "Danh mục",
+        "page_add": "Thêm danh mục",
+        "form_title": "Danh mục",
+        "load_failed": "Lỗi khi tải danh mục!",
+        "table": {
+            "name": "Tên",
+            "actions" : {
+                "title": "Hành động",
+                "edit": "Sửa",
+                "delete": "Xoá"
+            }
+        },
+        "form_name": {
+            "title": "Tên",
+            "required": "Vui lòng nhập tên danh mục!"
+        },
+        "form_cancel": {
+            "title": "Huỷ"
+        },
+        "form_create": {
+            "title":  "Tạo",
+            "success": "Tạo danh mục thành công!",
+            "failed": "Tạo danh mục thất bại!"
+        },
+        "form_edit": {
+            "title":  "Sửa",
+            "success": "Cập nhật danh mục thành công!",
+            "failed": "Cập nhật danh mục thất bại!"
+        },
+        "form_delete": {
+            "success": "Xoá danh mục thành công!",
+            "failed": "Xoá danh mục thất bại!",
+            "confirm": {
+                "title": "Bạn muốn xoá danh mục này không?",
+                "ok": "Xoá",
+                "cancel": "Huỷ"
+            }
+        }
+    },
+    "order": {
+        "status": {
+            "processing": "Đang xử lý",
+            "completed": "Hoàn thành",
+            "pending": "Đang chờ",
+            "trash": "Đã xoá"
+        },
+        "page_title": "Đơn hàng",
+        "page_add": "Thêm đơn hàng",
+        "form_title": "Đơn hàng",
+        "load_failed": "Lỗi khi tải đơn hàng!",
+        "load_failed_product": "Lỗi khi tải sản phẩm!",
+        "table": {
+            "name": "Tên",
+            "time": "Thời gian",
+            "status": "Trạng thái",
+            "total": "Tổng cộng",
+            "item_details": "Chi tiết",
+            "items": "Mặt hàng",
+            "description": "Miêu tả",
+            "actions" : {
+                "title": "Hành động",
+                "edit": "Sửa",
+                "delete": "Xoá",
+                "restore": "Khôi phục"
+            }
+        },
+        "form_name": {
+            "title": "Tên",
+            "placeholder": "Tên đơn hàng",
+            "required": "Vui lòng nhập tên đơn hàng!"
+        },
+        "form_description": {
+            "title": "Miêu tả",
+            "placeholder": "Miêu tả đơn hàng..."
+        },
+        "form_status": {
+            "title": "Trạng thái",
+            "required": "Vui lòng chọn trạng thái"
+        },
+        "form_details": {
+            "discount": "Giảm giá",
+            "tax": "Thuế",
+            "total": "Tổng cộng"
+        },
+        "form_items": {
+            "add_p": "Thêm sản phẩm",
+            "add_c": "Thêm sản phẩm tuỳ chọn",
+            "items": "Mặt hàng",
+            "total": "Tổng cộng",
+            "name": {
+                "title": "Tên",
+                "required": "Vui lòng nhập!",
+                "input": "Tên sản phẩm",
+                "select": "Chọn sản phẩm"
+            },
+            "qty": {
+                "title": "Số lượng",
+                "required": "Vui lòng nhập!"
+            },
+            "price": {
+                "title": "Giá",
+                "required": "Vui lòng nhập!"
+            },
+            "discount": {
+                "title": "Giảm giá",
+                "required": "Vui lòng nhập!"
+            },
+            "tax": {
+                "title": "Thuế (%)",
+                "required": "Vui lòng nhập!"
+            },
+            "actions": {
+                "title": "Hành động",
+                "delete": "Xoá",
+                "confirm": {
+                    "title": "Xoá mặt hàng này?",
+                    "ok": "Xoá",
+                    "cancel": "Huỷ"
+                }
+            }
+        },
+        "form_cancel": {
+            "title": "Huỷ"
+        },
+        "form_create": {
+            "login": "Vui lòng đăng nhập!",
+            "title":  "Tạo",
+            "success": "Tạo đơn hàng thành công!",
+            "failed": "Tạo đơn hàng thất bại!"
+        },
+        "form_edit": {
+            "title":  "Sửa",
+            "success": "Cập nhật đơn hàng thành công!",
+            "failed": "Cập nhât đơn hàng thất bại!"
+        },
+        "form_delete": {
+            "success": "Đơn hàng đã xoá thành công!",
+            "failed": "Đơn hàng đã xoá thất bại!",
+            "confirm": {
+                "title": "Bạn muốn xoá đơn hàng này không?",
+                "ok": "Xoá",
+                "cancel": "Huỷ"
+            }
+        },
+        "form_restore": {
+            "success": "Đơn hàng khôi phục thành công!",
+            "failed": "Đơn hàng khôi phục thất bại!"
+        },
+        "filter": {
+            "select_date": "Chọn ngày",
+            "select_status": "Chọn trạng thái"
+        },
+        "card": {
+            "time": "Giờ",
+            "header": {
+                "name": "Tên",
+                "qty": "Số lượng",
+                "price": "Giá",
+                "total": "Tổng cộng"
+            },
+            "bottom": {
+                "total": "Tổng cộng",
+                "discount": "Giảm giá",
+                "tax": "Thuế",
+                "payment": "Tổng tiền trả"
+            },
+            "item": {
+                "discount": "Tổng giảm giá",
+                "regular": "Giá gốc"
+            }
+        }
+    }
+}

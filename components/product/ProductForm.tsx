@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import {Form, Input, InputNumber, Select, Button, Typography} from 'antd';
 import { fetchCategory } from '@/lib/services/categoryService';
+import { useTranslation } from 'react-i18next';
 
 import type { Product } from '@/types/product';
 import type { Category, CategoryOption } from '@/types/category';
@@ -10,7 +11,7 @@ import type { Category, CategoryOption } from '@/types/category';
 const { Title } = Typography;
 
 interface IProps {
-    type: 'Create' | 'Edit';
+    type: string;
     product: Product;
     setProduct: (product: Product) => void;
     submitting: boolean;
@@ -28,6 +29,7 @@ const ProductForm = ({
 }: IProps) => {
     const [form]  = Form.useForm<Product>();
     const [options, setOptions] = useState<CategoryOption[]>([]);
+    const { t } = useTranslation();
 
     useEffect(() => {
         const loadOptions = async () => {
@@ -47,7 +49,7 @@ const ProductForm = ({
 
     return (
         <>
-            <Title level={2}>{type} Product</Title>
+            <Title level={2}>{type} {t('product.form_title')}</Title>
             <Form
                 form={form}
                 layout="vertical"
@@ -57,35 +59,35 @@ const ProductForm = ({
             >
                 <Form.Item
                     name="name"
-                    label="Name"
-                    rules={[{ required: true, message: 'Please enter product name!' }]}
+                    label={t('product.form_name.title')}
+                    rules={[{ required: true, message: t('product.form_name.required') }]}
                 >
-                    <Input placeholder="Product name" />
+                    <Input placeholder={t('product.form_name.title')} />
                 </Form.Item>
 
                 <Form.Item
                     name="price"
-                    label="Price"
-                    rules={[{ required: true, message: 'Please enter product price!' }]}
+                    label={t('product.form_price.title')}
+                    rules={[{ required: true, message: t('product.form_price.required') }]}
                 >
                     <InputNumber
                         style={{ width: '100%' }}
                         min={0}
                         step={1000}
-                        placeholder="Price"
+                        placeholder={t('product.form_price.title')}
                         addonAfter="đ"
                     />
                 </Form.Item>
 
                 <Form.Item
                     name="category"
-                    label="Category"
-                    rules={[{ required: true, message: 'Please select product category!' }]}
+                    label={t('product.form_category.title')}
+                    rules={[{ required: true, message: t('product.form_category.required') }]}
                 >
                     <Select
                         mode="multiple"
                         style={{ width: '100%' }}
-                        placeholder="Please select product category!"
+                        placeholder={t('product.form_category.required')}
                         options={options}
                     />
                 </Form.Item>
@@ -95,7 +97,7 @@ const ProductForm = ({
                         onClick={handleCancel}
                         style={{ marginRight: '10px' }}
                     >
-                        Cancel
+                        {t('product.form_cancel.title')}
                     </Button>
                     <Button
                         type="primary"

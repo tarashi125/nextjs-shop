@@ -7,6 +7,7 @@ import {
     Typography,
 } from 'antd';
 import { useForm } from 'antd/es/form/Form';
+import { useTranslation } from 'react-i18next';
 
 import type { Category } from '@/types/category';
 
@@ -15,17 +16,22 @@ const { Title } = Typography;
 interface IProps {
     type: string;
     category: Category;
-    handleSubmit: (values: Category) => void;
+    setCategory: (category: Category) => void;
+    submitting: boolean;
+    handleSubmit: () => void;
     handleCancel: () => void;
 }
 
 const CategoryForm = ({
     type,
     category,
+    setCategory,
+    submitting,
     handleCancel,
     handleSubmit,
 }: IProps) => {
     const [form] = useForm<Category>();
+    const { t } = useTranslation();
 
     useEffect(() => {
         form.setFieldsValue(category);
@@ -39,15 +45,16 @@ const CategoryForm = ({
             autoComplete="off"
             layout="vertical"
             style={{ maxWidth: 600 }}
+            onValuesChange={(_, allValues) => setCategory(allValues)}
         >
-            <Title level={2}>{type} Category</Title>
+            <Title level={2}>{type} {t('category.form_title')}</Title>
 
             <Form.Item
                 name="name"
-                label="Name"
-                rules={[{ required: true, message: 'Please enter category name!' }]}
+                label={t('category.form_name.title')}
+                rules={[{ required: true, message: t('category.form_name.required') }]}
             >
-                <Input placeholder="Category name" />
+                <Input placeholder={t('category.form_name.title')} />
             </Form.Item>
 
             <Form.Item label=" ">
@@ -57,14 +64,14 @@ const CategoryForm = ({
                     variant="outlined"
                     style={{marginRight: '10px'}}
                 >
-                    Cancel
+                    {t('category.form_cancel.title')}
                 </Button>
                 <Button
                     color="primary"
                     variant="solid"
                     htmlType="submit"
                 >
-                    {type}
+                    {submitting ? `${type}...` : type}
                 </Button>
             </Form.Item>
         </Form>

@@ -6,6 +6,7 @@ import { LockOutlined, UserOutlined, AndroidOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 import { useDispatch } from 'react-redux';
 import { setNotification } from '@/store/notificationSlice';
+import { useTranslation } from 'react-i18next';
 
 import type { AppDispatch } from '@/store';
 
@@ -24,10 +25,10 @@ export default function RegisterForm({ setFormShowing }: IProps) {
     const dispatch = useDispatch<AppDispatch>();
     const [form] = Form.useForm<RegisterFormFields>();
     const [submitting, setSubmitting] = useState<boolean>(false);
+    const { t } = useTranslation();
 
     const handleRegister = async (values: RegisterFormFields) => {
         setSubmitting(true);
-
         const { username, name, password } = values;
 
         try {
@@ -42,7 +43,7 @@ export default function RegisterForm({ setFormShowing }: IProps) {
                 dispatch(
                     setNotification({
                         type: 'success',
-                        message: 'Register success!',
+                        message: t('register_form.message.success'),
                     })
                 );
                 form.resetFields();
@@ -55,12 +56,12 @@ export default function RegisterForm({ setFormShowing }: IProps) {
                 dispatch(
                     setNotification({
                         type: 'error',
-                        message: data.error || 'Registration failed',
+                        message: data.error || t('register_form.message.failed'),
                     })
                 );
             }
         } catch (err: unknown) {
-            const message = err instanceof Error ? err.message : 'Unexpected error occurred!';
+            const message = err instanceof Error ? err.message : t('register_form.message.error');
             dispatch(setNotification({ type: 'error', message }));
         } finally {
             setSubmitting(false);
@@ -77,41 +78,41 @@ export default function RegisterForm({ setFormShowing }: IProps) {
         >
             <Form.Item
                 name="username"
-                rules={[{ required: true, message: 'Please input your Username!' }]}
+                rules={[{ required: true, message: t('register_form.username.required') }]}
             >
-                <Input prefix={<UserOutlined />} placeholder="Username" />
+                <Input prefix={<UserOutlined />} placeholder={t('register_form.username.title')} />
             </Form.Item>
 
-            <Form.Item name="name" rules={[{ required: true, message: 'Please enter Name!' }]}>
-                <Input prefix={<AndroidOutlined />} placeholder="Your Name" />
+            <Form.Item name="name" rules={[{ required: true, message: t('register_form.name.required') }]}>
+                <Input prefix={<AndroidOutlined />} placeholder={t('register_form.name.title')} />
             </Form.Item>
 
             <Form.Item
                 name="password"
                 rules={[
-                    { required: true, message: 'Please input your Password!' },
-                    { min: 6, message: 'Password must be at least 6 characters' },
+                    { required: true, message: t('register_form.password.required') },
+                    { min: 6, message: t('register_form.password.min') },
                 ]}
             >
-                <Input.Password prefix={<LockOutlined />} placeholder="Password" />
+                <Input.Password prefix={<LockOutlined />} placeholder={t('register_form.password.title')} />
             </Form.Item>
 
             <Form.Item
                 name="confirm_password"
                 dependencies={['password']}
                 rules={[
-                    { required: true, message: 'Please confirm your Password!' },
+                    { required: true, message: t('register_form.confirm_password.required') },
                     ({ getFieldValue }) => ({
                         validator(_, value) {
                             if (!value || getFieldValue('password') === value) {
                                 return Promise.resolve();
                             }
-                            return Promise.reject(new Error('Passwords do not match!'));
+                            return Promise.reject(new Error(t('register_form.confirm_password.validate')));
                         },
                     }),
                 ]}
             >
-                <Input.Password prefix={<LockOutlined />} placeholder="Confirm Password" />
+                <Input.Password prefix={<LockOutlined />} placeholder={t('register_form.confirm_password.title')} />
             </Form.Item>
 
             <Form.Item style={{ marginBottom: 0, textAlign: 'center' }}>
@@ -123,15 +124,15 @@ export default function RegisterForm({ setFormShowing }: IProps) {
                     style={{ marginBottom: 5 }}
                     block
                 >
-                    Register
+                    {t('register_form.register')}
                 </Button>
                 <p className="text-center text-sm text-gray-500 mt-4">
-                    Already have an account?{' '}
+                    {t('register_form.note')}{' '}
                     <button
                         onClick={() => setFormShowing('login')}
                         className="text-blue-600 hover:underline font-medium cursor-pointer"
                     >
-                        Login now!
+                        {t('register_form.dk')}
                     </button>
                 </p>
             </Form.Item>

@@ -9,6 +9,7 @@ import CategoryForm from '@/components/category/CategoryForm';
 import { fetchCategoryById, updateCategory } from '@/lib/services/categoryService';
 import { createDefaultCategory } from '@/lib/helpers/category';
 import { setNotification } from '@/store/notificationSlice';
+import { useTranslation } from 'react-i18next';
 
 import type { AppDispatch } from '@/store';
 import type { Category } from '@/types/category';
@@ -18,47 +19,41 @@ const EditCategory = () => {
     const searchParams = useSearchParams();
     const dispatch = useDispatch<AppDispatch>();
 
+    const [submitting, setSubmitting] = useState(false);
     const [category, setCategory] = useState<Category>(createDefaultCategory());
-
     const categoryId = searchParams.get('id') as string;
+    const { t } = useTranslation();
 
     useEffect(() => {
-        if (!categoryId || categoryId === 'null' || categoryId === 'undefined') {
-            dispatch(
-                setNotification({
-                    type: 'error',
-                    message: 'Invalid category ID'
-                })
-            );
-            router.push('/category');
-            return;
-        }
-
+        setSubmitting(true);
         const loadCategory = async () => {
             try {
+                if (!categoryId) return;
                 const data = await fetchCategoryById(categoryId);
                 setCategory(data);
             } catch {
                 dispatch(
                     setNotification({
                         type: 'error',
-                        message: 'Failed to load category'
+                        message: t('category.load_failed'),
                     })
                 );
                 router.push('/category');
+            } finally {
+                setSubmitting(false);
             }
         };
 
         loadCategory();
     }, [categoryId, dispatch, router]);
 
-    const handleEditCategory = async (values: Category) => {
+    const handleEditCategory = async () => {
         try {
-            await updateCategory(categoryId, values);
+            await updateCategory(categoryId, category);
             dispatch(
                 setNotification({
                     type: 'success',
-                    message: 'Category edited successfully!'
+                    message: t('category.form_edit.success')
                 })
             );
             router.push('/category');
@@ -66,7 +61,7 @@ const EditCategory = () => {
             dispatch(
                 setNotification({
                     type: 'error',
-                    message: 'Error editing category!',
+                    message: t('category.form_edit.failed'),
                     description: error?.message || '',
                 })
             );
@@ -76,8 +71,10 @@ const EditCategory = () => {
     return (
         <Container>
             <CategoryForm
-                type="Edit"
+                type={t('category.form_edit.title')}
                 category={category}
+                setCategory={setCategory}
+                submitting={submitting}
                 handleSubmit={handleEditCategory}
                 handleCancel={() => router.push('/category')}
             />

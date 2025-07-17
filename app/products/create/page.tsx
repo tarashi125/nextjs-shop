@@ -5,10 +5,11 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from 'react-redux';
 
 import Container from "@/components/Container";
-import ProductForm from "@/components/ProductForm";
+import ProductForm from "@/components/product/ProductForm";
 import { setNotification } from '@/store/notificationSlice';
 import { createProduct } from '@/lib/services/productService'
 import { createDefaultProduct } from '@/lib/helpers/product';
+import { useTranslation } from 'react-i18next';
 
 import type { AppDispatch } from '@/store';
 import type { Product } from '@/types/product';
@@ -18,6 +19,7 @@ const CreateProduct = () => {
     const dispatch = useDispatch<AppDispatch>();
     const [product, setProduct] = useState<Product>(createDefaultProduct());
     const [submitting, setSubmitting] = useState(false);
+    const { t } = useTranslation();
 
     const handleCreateProduct = async () => {
         setSubmitting(true);
@@ -26,7 +28,7 @@ const CreateProduct = () => {
             dispatch(
                 setNotification({
                     type: 'success',
-                    message: 'Product created success!',
+                    message: t('product.form_create.success'),
                     description: '',
                 })
             );
@@ -35,7 +37,7 @@ const CreateProduct = () => {
             dispatch(
                 setNotification({
                     type: 'error',
-                    message: 'Error on create product!',
+                    message: t('product.form_create.failed'),
                     description: '',
                 })
             );
@@ -47,7 +49,7 @@ const CreateProduct = () => {
     return (
         <Container>
             <ProductForm
-                type="Create"
+                type={t('product.form_create.title')}
                 product={product}
                 setProduct={setProduct}
                 submitting={submitting}

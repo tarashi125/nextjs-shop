@@ -1,4 +1,5 @@
 'use client';
+
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
@@ -10,6 +11,7 @@ import { setNotification } from '@/store/notificationSlice';
 import { fetchProduct } from '@/lib/services/productService';
 import { fetchCategory } from '@/lib/services/categoryService';
 import { formatCurrency } from '@/lib/utils';
+import { useTranslation } from 'react-i18next';
 
 import type { AppDispatch } from '@/store';
 import type { Product } from '@/types/product';
@@ -22,6 +24,7 @@ const ProductsPage = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
     const [filterOptions, setFilterOptions] = useState<{ label: string; value: string }[]>([]);
+    const { t } = useTranslation();
 
     const loadProducts = async () => {
         setLoading(true);
@@ -60,7 +63,7 @@ const ProductsPage = () => {
             dispatch(
                 setNotification({
                     type: 'success',
-                    message: 'Product deleted success!',
+                    message: t('product.form_delete.success'),
                     description: '',
                 })
             );
@@ -69,7 +72,7 @@ const ProductsPage = () => {
             dispatch(
                 setNotification({
                     type: 'error',
-                    message: 'Product deleted failed!',
+                    message: t('product.form_delete.failed'),
                     description: '',
                 })
             );
@@ -77,15 +80,19 @@ const ProductsPage = () => {
     };
 
     const columns = [
-        { title: 'Name', dataIndex: 'name', key: 'name' },
         {
-            title: 'Price',
+            title: t('product.table.name'),
+            dataIndex: 'name',
+            key: 'name'
+        },
+        {
+            title: t('product.table.price'),
             dataIndex: 'price',
             key: 'price',
             render: (v: number) => formatCurrency(v),
         },
         {
-            title: 'Actions',
+            title: t('product.table.actions.title'),
             key: 'actions',
             render: (_: any, record: Product) => (
                 <div className="flex flex-wrap md:flex-nowrap gap-4">
@@ -95,16 +102,18 @@ const ProductsPage = () => {
                             variant="outlined"
                             icon={<EditOutlined />}
                         >
-                            Edit
+                            {t('product.table.actions.edit')}
                         </Button>
                     </Link>
                     <Popconfirm
-                        title="Are you sure to delete this product?"
+                        title={t('product.form_delete.confirm.title')}
                         onConfirm={() => deleteProduct(record._id!)}
-                        okText="Delete"
-                        cancelText="Cancel"
+                        okText={t('product.form_delete.confirm.ok')}
+                        cancelText={t('product.form_delete.confirm.cancel')}
                     >
-                        <Button danger icon={<DeleteOutlined />}>Delete</Button>
+                        <Button danger icon={<DeleteOutlined />}>
+                            {t('product.table.actions.delete')}
+                        </Button>
                     </Popconfirm>
                 </div>
             ),
@@ -114,14 +123,14 @@ const ProductsPage = () => {
     return (
         <Container>
             <div className="flex justify-between items-center mb-4">
-                <h1 className="text-3xl font-bold">Products</h1>
+                <h1 className="text-3xl font-bold">{t('product.page_title')}</h1>
 
                 <Link href="/products/create">
                     <Button
                         type="primary"
                         icon={<AppstoreAddOutlined />}
                     >
-                        Add Product
+                        {t('product.page_add')}
                     </Button>
                 </Link>
             </div>
@@ -132,7 +141,7 @@ const ProductsPage = () => {
                     mode="multiple"
                     allowClear
                     style={{ width: 240 }}
-                    placeholder="Filter by category"
+                    placeholder={t('product.page_filter')}
                     onChange={(value: string[]) => setSelectedCategory(value)}
                     options={filterOptions}
                 />

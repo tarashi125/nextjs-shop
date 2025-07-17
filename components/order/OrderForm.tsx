@@ -17,6 +17,7 @@ import { useForm, useWatch } from 'antd/es/form/Form';
 import { formatCurrency } from '@/lib/utils';
 import { createDefaultOrderItem } from '@/lib/helpers/order';
 import { orderStatus, getStatusColor } from '@/constants/defaults';
+import { useTranslation } from 'react-i18next';
 
 import type { OrderItem } from '@/types/order';
 import { Product } from '@/types/product';
@@ -52,6 +53,7 @@ const OrderForm= ({
      handleSubmit,
      products,
 } : IProps ) => {
+    const { t } = useTranslation();
     const [form] = useForm<Order>();
 
     const title = useWatch('title', form);
@@ -129,24 +131,34 @@ const OrderForm= ({
         >
             <Title level={2}>{type} order</Title>
 
-            <Form.Item name="title" label="Title" rules={[{ required: true, message: 'Please enter name!' }]}>
-                <Input placeholder="Order name" />
+            <Form.Item
+                name="title"
+                label={t('order.form_name.title')}
+                rules={[{ required: true, message: t('order.form_name.required') }]}
+            >
+                <Input placeholder={t('order.form_name.placeholder')} />
             </Form.Item>
 
-            <Form.Item name="description" label="Description">
-                <TextArea rows={3} placeholder="Order description..." />
+            <Form.Item
+                name="description"
+                label={t('order.form_description.title')}
+            >
+                <TextArea
+                    rows={3}
+                    placeholder={t('order.form_description.placeholder')}
+                />
             </Form.Item>
 
             <Form.Item
                 name="status"
-                label="Status"
-                rules={[{ required: true, message: 'Please select a status!' }]}
+                label={t('order.form_status.title')}
+                rules={[{ required: true, message: t('order.form_status.required') }]}
                 style={{maxWidth: '200px'}}
             >
-                <Select placeholder="Select status">
-                    {Object.entries(orderStatus).map(([key, label]) => (
+                <Select placeholder={t('order.form_status.required')}>
+                    {orderStatus.map((key) => (
                         <Option key={key} value={key}>
-                            <Tag color={getStatusColor(key)}>{label}</Tag>
+                            <Tag color={getStatusColor(key)}>{t(`order.status.${key}`)}</Tag>
                         </Option>
                     ))}
                 </Select>
@@ -156,7 +168,7 @@ const OrderForm= ({
                 {(fields, { add, remove }) => {
                     const columns = [
                         {
-                            title: 'Name',
+                            title: t('order.form_items.name.title'),
                             dataIndex: 'name',
                             width: '25%',
                             render: (_, __, index: number) => {
@@ -164,13 +176,13 @@ const OrderForm= ({
                                 return (
                                     <Form.Item style={{ margin: 0 }}
                                         name={[index, currentType === 'custom' ? 'name' : 'productId']}
-                                        rules={[{ required: true, message: 'Required!' }]}
+                                        rules={[{ required: true, message: t('order.form_items.name.required') }]}
                                     >
                                         {currentType === 'custom' ? (
-                                            <Input placeholder="Enter product name" />
+                                            <Input placeholder={t('order.form_items.name.input')} />
                                         ) : (
                                             <Select
-                                                placeholder="Select product"
+                                                placeholder={t('order.form_items.name.select')}
                                                 onChange={(value) => handleSelectProduct(value, index)}
                                                 showSearch
                                                 optionFilterProp="children"
@@ -192,57 +204,77 @@ const OrderForm= ({
                             },
                         },
                         {
-                            title: 'Qty',
+                            title: t('order.form_items.qty.title'),
                             dataIndex: 'qty',
                             width: '12.5%',
                             render: (_, __, index) => (
-                                <Form.Item style={{ margin: 0 }} name={[index, 'qty']} initialValue={1}>
+                                <Form.Item
+                                    style={{ margin: 0 }}
+                                    name={[index, 'qty']}
+                                    initialValue={1}
+                                    rules={[{ required: true, message: t('order.form_items.qty.required') }]}
+                                >
                                     <InputNumber min={0.1} step={1} style={{ width: '100%' }} />
                                 </Form.Item>
                             ),
                         },
                         {
-                            title: 'Price',
+                            title: t('order.form_items.price.title'),
                             dataIndex: 'price',
                             width: '16,67%',
                             render: (_, __, index) => (
                                 <Form.Item
                                     style={{ margin: 0 }}
                                     name={[index, 'price']}
-                                    rules={[{ required: true, message: 'Required!' }]}
+                                    rules={[{ required: true, message: t('order.form_items.price.required') }]}
                                 >
                                     <InputNumber min={0} step={1000} style={{ width: '100%' }} addonAfter="đ" />
                                 </Form.Item>
                             ),
                         },
                         {
-                            title: 'Discount',
+                            title: t('order.form_items.discount.title'),
                             dataIndex: 'discount',
                             width: '16,67%',
                             render: (_, __, index) => (
-                                <Form.Item style={{ margin: 0 }} name={[index, 'discount']} initialValue={0}>
+                                <Form.Item
+                                    style={{ margin: 0 }}
+                                    name={[index, 'discount']}
+                                    initialValue={0}
+                                    rules={[{ required: true, message: t('order.form_items.discount.required') }]}
+                                >
                                     <InputNumber min={0} step={1000} style={{ width: '100%' }} addonAfter="đ" />
                                 </Form.Item>
                             ),
                         },
                         {
-                            title: 'Tax (%)',
+                            title: t('order.form_items.tax.title'),
                             dataIndex: 'tax',
                             width: '12.5%',
                             render: (_, __, index) => (
-                                <Form.Item style={{ margin: 0 }} name={[index, 'tax']} initialValue={0}>
+                                <Form.Item
+                                    style={{ margin: 0 }}
+                                    name={[index, 'tax']}
+                                    initialValue={0}
+                                    rules={[{ required: true, message: t('order.form_items.tax.required') }]}
+                                >
                                     <InputNumber min={0} max={100} step={1} style={{ width: '100%' }} addonAfter="%" />
                                 </Form.Item>
                             ),
                         },
                         {
-                            title: 'Action',
-                            dataIndex: 'action',
+                            title: t('order.form_items.actions.title'),
+                            dataIndex: 'actions',
                             width: '16,67%',
                             render: (_, __, index) => (
-                                <Popconfirm title="Delete this item?" onConfirm={() => remove(index)}>
+                                <Popconfirm
+                                    title={t('order.form_items.actions.confirm.title')}
+                                    okText={t('order.form_items.actions.confirm.ok')}
+                                    cancelText={t('order.form_items.actions.confirm.cancel')}
+                                    onConfirm={() => remove(index)}
+                                >
                                     <Button danger icon={<DeleteOutlined />}>
-                                        Remove
+                                        {t('order.form_items.actions.delete')}
                                     </Button>
                                 </Popconfirm>
                             ),
@@ -253,7 +285,7 @@ const OrderForm= ({
                         <>
                             <Table
                                 bordered
-                                title={() => 'Items'}
+                                title={() => t('order.form_items.items')}
                                 dataSource={fields.map((field, index) => ({ key: field.key, index }))}
                                 columns={columns}
                                 pagination={false}
@@ -263,7 +295,7 @@ const OrderForm= ({
                                         const detail = itemDetails[index] || {};
                                         return (
                                             <div style={{ paddingLeft: 16 }}>
-                                                <p className={'p-0 text-right'}><strong>Total:</strong> {formatCurrency(detail.total)}</p>
+                                                <p className={'p-0 text-right'}><strong>{t('order.form_items.total')}:</strong> {formatCurrency(detail.total)}</p>
                                             </div>
                                         );
                                     },
@@ -279,7 +311,7 @@ const OrderForm= ({
                                         onClick={() => add(createDefaultOrderItem())}
                                         icon={<PlusOutlined />}
                                     >
-                                        Add product
+                                        {t('order.form_items.add_p')}
                                     </Button>
                                     <Button
                                         onClick={() => add({
@@ -289,7 +321,7 @@ const OrderForm= ({
                                         })}
                                         icon={<PlusOutlined />}
                                     >
-                                        Add custom product
+                                        {t('order.form_items.add_c')}
                                     </Button>
                                 </Space>
                             </Form.Item>
@@ -299,14 +331,16 @@ const OrderForm= ({
             </Form.List>
 
             <Form.Item>
-                <Title level={5}>Discount: {formatCurrency(totalDiscount)}</Title>
-                <Title level={5}>Tax: {formatCurrency(totalTax)}</Title>
-                <Title level={5}>Total: {formatCurrency(total)}</Title>
+                <Title level={5}>{t('order.form_details.discount')}: {formatCurrency(totalDiscount)}</Title>
+                <Title level={5}>{t('order.form_details.tax')}: {formatCurrency(totalTax)}</Title>
+                <Title level={5}>{t('order.form_details.total')}: {formatCurrency(total)}</Title>
             </Form.Item>
 
             <Form.Item>
                 <Space>
-                    <Button onClick={handleCancel}>Cancel</Button>
+                    <Button onClick={handleCancel}>
+                        {t('order.form_cancel.title')}
+                    </Button>
                     <Button
                         type="primary"
                         htmlType="submit"

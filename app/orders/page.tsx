@@ -22,6 +22,7 @@ import { fetchOrders, updateOrder } from '@/lib/services/orderService';
 import { useDispatch } from 'react-redux';
 import { setNotification } from '@/store/notificationSlice';
 import { getStatusColor } from '@/constants/defaults';
+import { useTranslation } from 'react-i18next';
 
 import type { AppDispatch } from '@/store';
 import type { Order, OrderFilterParams } from '@/types/order';
@@ -38,6 +39,7 @@ const OrdersPage = () => {
             endDate: '',
         };
     });
+    const { t } = useTranslation();
 
 
     const loadOrders = async () => {
@@ -45,6 +47,8 @@ const OrdersPage = () => {
         const data = await fetchOrders(params);
         setOrders(data);
         setLoading(false);
+
+        console.log(data)
     };
 
     useEffect(()=> {
@@ -57,7 +61,7 @@ const OrdersPage = () => {
             dispatch(
                 setNotification({
                     type: 'success',
-                    message: 'Order deleted successfully!',
+                    message: t('order.form_delete.success'),
                 })
             );
             loadOrders();
@@ -65,7 +69,7 @@ const OrdersPage = () => {
             dispatch(
                 setNotification({
                     type: 'error',
-                    message: 'Order delete failed!',
+                    message: t('order.form_delete.success'),
                 })
             );
         }
@@ -77,7 +81,7 @@ const OrdersPage = () => {
             dispatch(
                 setNotification({
                     type: 'success',
-                    message: 'Order restored successfully!',
+                    message: t('order.form_restore.success'),
                 })
             );
             loadOrders();
@@ -85,7 +89,7 @@ const OrdersPage = () => {
             dispatch(
                 setNotification({
                     type: 'error',
-                    message: 'Order restore failed!',
+                    message: t('order.form_restore.failed'),
                 })
             );
         }
@@ -93,34 +97,39 @@ const OrdersPage = () => {
     
     const columns = [
         {
-            title: 'Title',
+            title: t('order.table.name'),
             dataIndex: 'title',
             key: 'title',
         },
         {
-            title: 'Time',
+            title: t('order.table.time'),
             dataIndex: 'createdAt',
             key: 'createdAt',
             render: (text: string) => formatTime(text),
         },
         {
-            title: 'Status',
+            title: t('order.table.status'),
             dataIndex: 'status',
             key: 'status',
             render: (status: string) => (
-                <Tag color={getStatusColor(status) || 'gray'}>{status.toUpperCase()}</Tag>
+                <Tag
+                    className="uppercase"
+                    color={getStatusColor(status) || 'gray'}
+                >
+                    {t(`order.status.${status}`)}
+                </Tag>
             ),
         },
         {
-            title: 'Total',
+            title: t('order.table.total'),
             dataIndex: 'total',
             key: 'total',
             align: 'right',
             render: (total: number) => formatCurrency(total),
         },
         {
-            title: 'Action',
-            key: 'action',
+            title: t('order.table.actions.title'),
+            key: 'actions',
             render: (_, record) => (
                 <div className="flex gap-4">
                     { record.status !== 'trash' ? (
@@ -131,16 +140,18 @@ const OrdersPage = () => {
                                     variant="outlined"
                                     icon={<EditOutlined />}
                                 >
-                                    Edit
+                                    {t('order.table.actions.edit')}
                                 </Button>
                             </Link>
                             <Popconfirm
-                                title="Are you sure to delete this order?"
+                                title={t('order.form_delete.confirm.title')}
                                 onConfirm={() => handleDeleteOrder(record._id)}
-                                okText="Delete"
-                                cancelText="Cancel"
+                                okText={t('order.form_delete.confirm.ok')}
+                                cancelText={t('order.form_delete.confirm.cancel')}
                             >
-                                <Button danger icon={<DeleteOutlined/>}>Delete</Button>
+                                <Button danger icon={<DeleteOutlined/>}>
+                                    {t('order.table.actions.delete')}
+                                </Button>
                             </Popconfirm>
                         </>
                     ) : (
@@ -150,7 +161,7 @@ const OrdersPage = () => {
                             icon={<RollbackOutlined />}
                             onClick={() => handleRestoreOrder(record._id)}
                         >
-                            Restore order
+                            {t('order.table.actions.restore')}
                         </Button>
                     ) }
                 </div>
@@ -161,14 +172,14 @@ const OrdersPage = () => {
     return (
         <Container>
             <div className="flex justify-between items-center mb-4">
-                <h1 className="text-3xl font-bold">Orders</h1>
+                <h1 className="text-3xl font-bold">{t('order.page_title')}</h1>
 
                 <Link href="/orders/create">
                     <Button
                         type="primary"
                         icon={<BookOutlined />}
                     >
-                        Add Order
+                        {t('order.page_add')}
                     </Button>
                 </Link>
             </div>
@@ -190,15 +201,15 @@ const OrdersPage = () => {
                             size="small"
                             column={1}
                             bordered
-                            title="Item details"
+                            title={t('order.table.item_details')}
                             className="bg-gray-50"
                         >
                             {record.description && (
-                                <Descriptions.Item label="Description">
+                                <Descriptions.Item label={t('order.table.description')}>
                                     {record.description}
                                 </Descriptions.Item>
                             )}
-                            <Descriptions.Item label="Items">
+                            <Descriptions.Item label={t('order.table.items')}>
                                 {record.items?.map((item) => (
                                     <div key={item._id}>
                                     • {item.name} × {item.qty}

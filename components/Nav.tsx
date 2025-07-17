@@ -15,35 +15,43 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import styles from '@/styles/Header.module.css';
 import type { MenuProps } from 'antd';
-
-const items: MenuProps['items'] = [
-    {
-        key: 'orders',
-        label: <Link href="/orders">Orders</Link>,
-        icon: <BookOutlined />,
-    },
-    {
-        key: 'products',
-        label: <Link href="/products">Products</Link>,
-        icon: <ProductOutlined />,
-    },
-    {
-        key: 'category',
-        label: <Link href="/category">Category</Link>,
-        icon: <UnorderedListOutlined />,
-    },
-    { type: 'divider' },
-    {
-        key: 'logout',
-        label: <a onClick={(e) => { e.preventDefault(); signOut(); }}>Logout</a>,
-        icon: <LogoutOutlined />,
-    },
-];
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const Nav = () => {
     const { data: session } = useSession();
     const [hidden, setHidden] = useState<boolean>(false);
     const [lastScrollY, setLastScrollY] = useState<number>(0);
+    const { t } = useTranslation();
+
+    const items: MenuProps['items'] = [
+        {
+            key: 'language',
+            label: <LanguageSwitcher/>,
+        },
+        { type: 'divider' },
+        {
+            key: 'orders',
+            label: <Link href="/orders">{t('nav.orders')}</Link>,
+            icon: <BookOutlined />,
+        },
+        {
+            key: 'products',
+            label: <Link href="/products">{t('nav.products')}</Link>,
+            icon: <ProductOutlined />,
+        },
+        {
+            key: 'category',
+            label: <Link href="/category">{t('nav.categories')}</Link>,
+            icon: <UnorderedListOutlined />,
+        },
+        { type: 'divider' },
+        {
+            key: 'logout',
+            label: <a onClick={(e) => { e.preventDefault(); signOut(); }}>{t('nav.logout')}</a>,
+            icon: <LogoutOutlined />,
+        },
+    ];
 
     useEffect(() => {
         let ticking = false;

@@ -6,6 +6,7 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 import { useDispatch } from 'react-redux';
 import { setNotification } from '@/store/notificationSlice';
+import { useTranslation } from 'react-i18next';
 
 import type { AppDispatch } from '@/store';
 
@@ -22,6 +23,7 @@ export default function LoginForm({ setFormShowing }: IProps) {
     const dispatch = useDispatch<AppDispatch>();
     const [form] = Form.useForm<LoginFormFields>();
     const [submitting, setSubmitting] = useState<boolean>(false);
+    const { t } = useTranslation();
 
     const handleRegister = async (values: LoginFormFields) => {
         setSubmitting(true);
@@ -36,17 +38,17 @@ export default function LoginForm({ setFormShowing }: IProps) {
             if (!res?.error) {
                 dispatch(setNotification({
                     type: 'success',
-                    message: 'Login success!',
+                    message: t('login_form.message.success'),
                 }));
                 form.resetFields();
             } else {
                 dispatch(setNotification({
                     type: 'error',
-                    message: 'Login failed!',
+                    message: t('login_form.message.failed'),
                 }));
             }
         } catch (err: unknown) {
-            const message = err instanceof Error ? err.message : 'Unexpected error occurred!';
+            const message = err instanceof Error ? err.message : t('login_form.message.error');
             dispatch(setNotification({
                 type: 'error',
                 message,
@@ -67,15 +69,15 @@ export default function LoginForm({ setFormShowing }: IProps) {
         >
             <Form.Item
                 name="username"
-                rules={[{ required: true, message: 'Please input your Username!' }]}
+                rules={[{ required: true, message: t('login_form.username.required') }]}
             >
-                <Input prefix={<UserOutlined />} placeholder="Username" autoFocus />
+                <Input prefix={<UserOutlined />} placeholder={t('login_form.username.title')} autoFocus />
             </Form.Item>
             <Form.Item
                 name="password"
-                rules={[{ required: true, message: 'Please input your Password!' }]}
+                rules={[{ required: true, message: t('login_form.password.required') }]}
             >
-                <Input.Password prefix={<LockOutlined />} placeholder="Password" />
+                <Input.Password prefix={<LockOutlined />} placeholder={t('login_form.password.title')} />
             </Form.Item>
 
             <Form.Item style={{ marginBottom: 0, textAlign: 'center' }}>
@@ -87,16 +89,16 @@ export default function LoginForm({ setFormShowing }: IProps) {
                     style={{ marginBottom: 5 }}
                     block
                 >
-                    Log in
+                    {t('login_form.login')}
                 </Button>
                 <p className="text-center text-sm text-gray-500 mt-4">
-                    or{' '}
+                    {t('login_form.note')}{' '}
                     <button
                         onClick={() => setFormShowing('register')}
                         className="text-blue-600 hover:underline font-medium cursor-pointer"
-            type="button"
+                        type="button"
                     >
-                        Register now!
+                        {t('login_form.dk')}
                     </button>
                 </p>
             </Form.Item>

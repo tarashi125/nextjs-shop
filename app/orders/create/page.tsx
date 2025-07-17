@@ -11,6 +11,7 @@ import { setNotification } from '@/store/notificationSlice';
 import { fetchProduct } from '@/lib/services/productService';
 import { createOrder } from '@/lib/services/orderService';
 import { createDefaultOrder } from '@/lib/helpers/order';
+import { useTranslation } from 'react-i18next';
 
 import type { AppDispatch } from '@/store';
 import type { Order, OrderItem } from '@/types/order';
@@ -24,6 +25,7 @@ const CreateOrder = () => {
     const [submitting, setSubmitting] = useState<boolean>(false);
     const [ order, setOrder ] = useState<Order>(createDefaultOrder());
     const [ products, setProducts ] = useState<Product[]>([]);
+    const { t } = useTranslation();
 
     useEffect(() => {
         const loadProducts = async () => {
@@ -39,7 +41,7 @@ const CreateOrder = () => {
             dispatch(
                 setNotification({
                     type: 'error',
-                    message: 'Please login!',
+                    message: t('order.form_create.login'),
                 })
             );
             return;
@@ -63,7 +65,7 @@ const CreateOrder = () => {
             dispatch(
                 setNotification({
                     type: 'success',
-                    message: 'Order created success!',
+                    message: t('order.form_create.success'),
                 })
             );
             router.push('/orders');
@@ -71,7 +73,7 @@ const CreateOrder = () => {
             dispatch(
                 setNotification({
                     type: 'error',
-                    message: 'Error on create order!',
+                    message: t('order.form_create.failed'),
                 })
             );
         } finally {
@@ -82,7 +84,7 @@ const CreateOrder = () => {
     return (
         <Container>
             <OrderForm
-                type="Create"
+                type={t('product.form_create.title')}
                 order={order}
                 setOrder={setOrder}
                 submitting={submitting}

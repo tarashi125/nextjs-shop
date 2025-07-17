@@ -8,6 +8,7 @@ import { setNotification } from '@/store/notificationSlice';
 import { fetchOrderById, updateOrder } from '@/lib/services/orderService';
 import { fetchProduct } from '@/lib/services/productService';
 import { createDefaultOrder } from '@/lib/helpers/order';
+import { useTranslation } from 'react-i18next';
 
 import type { AppDispatch } from '@/store';
 import type { Order, OrderItem } from '@/types/order';
@@ -21,8 +22,9 @@ const EditOrder = () => {
     const [submitting, setSubmitting] = useState<boolean>(false);
     const [order, setOrder] = useState<Order>(createDefaultOrder());
     const [products, setProducts] = useState<Product[]>([]);
+    const { t } = useTranslation();
 
-    const orderId = searchParams.get('id');
+    const orderId = searchParams.get('id') as string;
 
     useEffect(() => {
         const loadProducts = async () => {
@@ -30,7 +32,12 @@ const EditOrder = () => {
                 const data = await fetchProduct();
                 setProducts(data);
             } catch {
-                dispatch(setNotification({ type: 'error', message: 'Failed to load products!' }));
+                dispatch(
+                    setNotification({
+                        type: 'error',
+                        message: t('order.load_failed_product')
+                    })
+                );
             }
         };
         loadProducts();
@@ -44,6 +51,7 @@ const EditOrder = () => {
     useEffect(() => {
         const loadOrder = async () => {
             try {
+                if (!orderId) return;
                 const data = await fetchOrderById(orderId);
                 const normalized: Order = {
                     ...data,
@@ -51,17 +59,15 @@ const EditOrder = () => {
                 };
                 setOrder(normalized);
             } catch (err) {
-                dispatch(setNotification({ type: 'error', message: 'Failed to load order!' }));
+                dispatch(
+                    setNotification({
+                        type: 'error',
+                        message: t('order.load_failed'),
+                    })
+                );
                 router.push('/orders');
             }
         };
-
-        if (orderId && orderId !== 'undefined' && orderId !== 'null') {
-            loadOrder();
-        } else {
-            dispatch(setNotification({ type: 'error', message: 'Invalid order ID' }));
-            router.push('/orders');
-        }
     }, [orderId, dispatch, router]);
 
     const handleEditOrder = async () => {
@@ -82,7 +88,7 @@ const EditOrder = () => {
             dispatch(
                 setNotification({
                     type: 'success',
-                    message: 'Order updated successfully!',
+                    message: t('order.form_edit.success'),
                 })
             );
             router.push('/orders');
@@ -90,7 +96,7 @@ const EditOrder = () => {
             dispatch(
                 setNotification({
                     type: 'error',
-                    message: 'Failed to update order!',
+                    message: t('order.form_edit.success'),
                 })
             );
         } finally {
@@ -101,7 +107,7 @@ const EditOrder = () => {
     return (
         <Container>
             <OrderForm
-                type="Edit"
+                type={t('order.form_edit.title')}
                 order={order}
                 setOrder={setOrder}
                 submitting={submitting}

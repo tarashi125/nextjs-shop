@@ -1,9 +1,10 @@
-import '@/styles/global.css';
-import '@ant-design/v5-patch-for-react-19';
+
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import Provider from '@/components/Provider';
-import Nav from '@/components/Nav';
+import ClientLayout from '@/app/ClientLayout';
 import type { Metadata } from 'next';
+import '@/styles/global.css';
+import '@ant-design/v5-patch-for-react-19';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -12,12 +13,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="en">
+        <html>
             <body>
                 <AntdRegistry>
                     <Provider>
-                        <Nav />
-                        <main className="pt-[100px] min-h-screen">{children}</main>
+                        <ClientLayout>{children}</ClientLayout>
                     </Provider>
                 </AntdRegistry>
             </body>

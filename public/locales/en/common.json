@@ -1,0 +1,283 @@
+{
+    "language": "Language",
+    "switchLanguage": "Switch language",
+    "login_form" : {
+        "login": "Login",
+        "note": "or",
+        "dk": "Register now!",
+        "username": {
+            "title": "Username",
+            "required": "Please input your Username!"
+        },
+        "password": {
+            "title": "Password",
+            "required": "Please input your Password!"
+        },
+        "message" : {
+            "success": "Login success!",
+            "failed": "Login failed!",
+            "error": "Unexpected error occurred!"
+        }
+    },
+    "register_form" : {
+        "register": "Register",
+        "note": "Already have an account?",
+        "dk": "Login now!",
+        "username": {
+            "title": "Username",
+            "required": "Please input your Username!"
+        },
+        "name": {
+            "title": "Your Name",
+            "required": "Please enter your name!"
+        },
+        "password": {
+            "title": "Password",
+            "required": "Please input your Password!",
+            "min": "Password must be at least 6 characters"
+        },
+        "confirm_password": {
+            "title": "Confirm Password",
+            "required": "Please confirm your Password!",
+            "validate": "Passwords do not match!"
+        },
+        "message" : {
+            "success": "Register success!",
+            "failed": "Register failed!",
+            "error": "Unexpected error occurred!"
+        }
+    },
+    "login_page": {
+        "login": "Login",
+        "register": "Register"
+    },
+    "nav" : {
+        "orders": "Orders",
+        "products": "Products",
+        "categories": "Categories",
+        "logout": "Logout"
+    },
+    "product": {
+        "page_title": "Products",
+        "page_add": "Add Product",
+        "page_filter": "Filter by category",
+        "form_title": "Product",
+        "load_failed": "Failed to load product!",
+        "table": {
+            "name": "Name",
+            "price": "Price",
+            "actions" : {
+                "title": "Actions",
+                "edit": "Edit",
+                "delete": "Delete"
+            }
+        },
+        "form_name": {
+            "title": "Name",
+            "required": "Please enter product name!"
+        },
+        "form_price": {
+            "title": "Price",
+            "required": "Please enter product price!"
+        },
+        "form_category": {
+            "title" :  "Category",
+            "required": "Please select product category!"
+        },
+        "form_cancel": {
+            "title": "Cancel"
+        },
+        "form_create": {
+            "title":  "Create",
+            "success": "Product created successfully!",
+            "failed": "Error on create product!"
+        },
+        "form_edit": {
+            "title":  "Edit",
+            "success": "Product edited successfully!",
+            "failed": "Error editing product"
+        },
+        "form_delete": {
+            "success": "Product deleted successfully!",
+            "failed": "Product deleted failed!",
+            "confirm": {
+                "title": "Are you sure to delete this product?",
+                "ok": "Delete",
+                "cancel": "Cancel"
+            }
+        }
+    },
+    "category": {
+        "page_title": "Categories",
+        "page_add": "Add Category",
+        "form_title": "Category",
+        "load_failed": "Failed to load category!",
+        "table": {
+            "name": "Name",
+            "actions" : {
+                "title": "Actions",
+                "edit": "Edit",
+                "delete": "Delete"
+            }
+        },
+        "form_name": {
+            "title": "Name",
+            "required": "Please enter category name!"
+        },
+        "form_cancel": {
+            "title": "Cancel"
+        },
+        "form_create": {
+            "title":  "Create",
+            "success": "Category created successfully!",
+            "failed": "Error on create category!"
+        },
+        "form_edit": {
+            "title":  "Edit",
+            "success": "Category edited successfully!",
+            "failed": "Error editing category"
+        },
+        "form_delete": {
+            "success": "Category deleted successfully!",
+            "failed": "Category deleted failed!",
+            "confirm": {
+                "title": "Are you sure to delete this category?",
+                "ok": "Delete",
+                "cancel": "Cancel"
+            }
+        }
+    },
+    "order": {
+        "status": {
+            "processing": "Processing",
+            "completed": "Completed",
+            "pending": "Pending",
+            "trash": "Trash"
+        },
+        "page_title": "Orders",
+        "page_add": "Add order",
+        "form_title": "Order",
+        "load_failed": "Failed to load order!",
+        "load_failed_product": "Failed to load products!",
+        "table": {
+            "name": "Title",
+            "time": "Time",
+            "status": "Status",
+            "total": "Total",
+            "item_details": "Item Details",
+            "items": "Items",
+            "description": "Description",
+            "actions" : {
+                "title": "Actions",
+                "edit": "Edit",
+                "delete": "Delete",
+                "restore": "Restore"
+            }
+        },
+        "form_name": {
+            "title": "Name",
+            "placeholder": "Order name",
+            "required": "Please enter name!"
+        },
+        "form_description": {
+            "title": "Description",
+            "placeholder": "Order description..."
+        },
+        "form_status": {
+            "title": "Status",
+            "required": "Please select a status!"
+        },
+        "form_details": {
+            "discount": "Discount",
+            "tax": "Tax",
+            "total": "Total"
+        },
+        "form_items": {
+            "add_p": "Add product",
+            "add_c": "Add custom product",
+            "items": "Items",
+            "total": "Total",
+            "name": {
+                "title": "Name",
+                "required": "Required!",
+                "input": "Enter product name",
+                "select": "Select product"
+            },
+            "qty": {
+                "title": "Qty",
+                "required": "Required!"
+            },
+            "price": {
+                "title": "Price",
+                "required": "Required!"
+            },
+            "discount": {
+                "title": "Discount",
+                "required": "Required!"
+            },
+            "tax": {
+                "title": "Tax (%)",
+                "required": "Required!"
+            },
+            "actions": {
+                "title": "Actions",
+                "delete": "Delete",
+                "confirm": {
+                    "title": "Delete this item?",
+                    "ok": "OK",
+                    "cancel": "Cancel"
+                }
+            }
+        },
+        "form_cancel": {
+            "title": "Cancel"
+        },
+        "form_create": {
+            "login": "Please login!",
+            "title":  "Create",
+            "success": "Order created successfully!",
+            "failed": "Error on create order!"
+        },
+        "form_edit": {
+            "title":  "Edit",
+            "success": "Order edited successfully!",
+            "failed": "Error editing order"
+        },
+        "form_delete": {
+            "success": "Order deleted successfully!",
+            "failed": "Order deleted failed!",
+            "confirm": {
+                "title": "Are you sure to delete this order?",
+                "ok": "Delete",
+                "cancel": "Cancel"
+            }
+        },
+        "form_restore": {
+            "success": "Order restored successfully!",
+            "failed": "Order restored failed!"
+        },
+        "filter": {
+            "select_date": "Select date",
+            "select_status": "Filter by status"
+        },
+        "card": {
+            "time": "Time",
+            "header": {
+                "name": "Name",
+                "qty": "Qty",
+                "price": "Price",
+                "total": "Total"
+            },
+            "bottom": {
+                "total": "Total",
+                "discount": "Discount",
+                "tax": "Tax",
+                "payment": "Total Payment"
+            },
+            "item": {
+                "discount": "Total discount",
+                "regular": "Regular Price"
+            }
+        }
+    }
+}

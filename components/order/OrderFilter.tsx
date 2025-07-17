@@ -1,5 +1,6 @@
 import { DatePicker, Select } from 'antd';
 import { orderStatus } from '@/constants/defaults';
+import { useTranslation } from 'react-i18next';
 
 import type { OrderFilterParams } from '@/types/order';
 import type { Dayjs } from 'dayjs';
@@ -10,6 +11,7 @@ interface IProps {
 }
 
 const OrderFilter = ({params, setParams}: IProps) => {
+    const { t } = useTranslation();
 
     const handleDateChange = (date: Dayjs | null) => {
         if (!date) {
@@ -44,15 +46,16 @@ const OrderFilter = ({params, setParams}: IProps) => {
             <DatePicker
                 value={params.date}
                 onChange={handleDateChange}
+                placeholder={t('order.filter.select_date')}
             />
             <Select
                 allowClear
                 style={{ width: 240 }}
-                placeholder="Filter by status"
+                placeholder={t('order.filter.select_status')}
                 value={params.status !== 'all' ? params.status : undefined}
                 onChange={handleStatusChange}
-                options={Object.entries(orderStatus).map(([key, value]) => ({
-                    label: value,
+                options={orderStatus.map((key) => ({
+                    label: t(`order.status.${key}`),
                     value: key,
                 }))}
             />

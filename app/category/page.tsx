@@ -8,16 +8,17 @@ import Container from '@/components/Container';
 import { setNotification } from '@/store/notificationSlice';
 import { fetchCategory, deleteCategory } from '@/lib/services/categoryService';
 import { DeleteOutlined, EditOutlined, UnorderedListOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 import type { Category } from '@/types/category';
 import type { AppDispatch } from '@/store';
-import type { TableColumnsType } from 'antd';
 
 
 const CategoryPage = () => {
     const dispatch = useDispatch<AppDispatch>();
     const [categories, setCategories] = useState<Category[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const { t } = useTranslation();
 
     const loadCategory = async () => {
         setLoading(true);
@@ -36,7 +37,7 @@ const CategoryPage = () => {
             dispatch(
                 setNotification({
                     type: 'success',
-                    message: 'Category deleted successfully!',
+                    message: t('category.form_delete.success'),
                 })
             );
             loadCategory();
@@ -44,33 +45,37 @@ const CategoryPage = () => {
             dispatch(
                 setNotification({
                     type: 'error',
-                    message: 'Category delete failed!',
+                    message: t('category.form_delete.failed'),
                 })
             );
         }
     };
 
-    const columns: TableColumnsType<Category> = [
+    const columns = [
         {
-            title: 'Name',
+            title: t('category.table.name'),
             dataIndex: 'name',
             key: 'name',
         },
         {
-            title: 'Actions',
+            title: t('category.table.actions.title'),
             key: 'actions',
             render: (_, record) => (
                 <div className="flex gap-4">
                     <Link href={`/category/edit/?id=${record._id}`}>
-                        <Button color="primary" variant="outlined" icon={<EditOutlined />}>Edit</Button>
+                        <Button color="primary" variant="outlined" icon={<EditOutlined />}>
+                            {t('category.table.actions.edit')}
+                        </Button>
                     </Link>
                     <Popconfirm
-                        title="Are you sure to delete this category?"
+                        title={t('category.form_delete.confirm.title')}
                         onConfirm={() => handleDeleteCategory(record._id!)}
-                        okText="Delete"
-                        cancelText="Cancel"
+                        okText={t('category.form_delete.confirm.ok')}
+                        cancelText={t('category.form_delete.confirm.cancel')}
                     >
-                        <Button danger icon={<DeleteOutlined />}>Delete</Button>
+                        <Button danger icon={<DeleteOutlined />}>
+                            {t('category.table.actions.delete')}
+                        </Button>
                     </Popconfirm>
                 </div>
             ),
@@ -80,14 +85,14 @@ const CategoryPage = () => {
     return (
         <Container>
             <div className="flex justify-between items-center mb-4">
-                <h1 className="text-3xl font-bold">Categories</h1>
+                <h1 className="text-3xl font-bold">{t('category.page_title')}</h1>
 
                 <Link href="/category/create">
                     <Button
                         type="primary"
                         icon={<UnorderedListOutlined />}
                     >
-                        Add Category
+                        {t('category.page_add')}
                     </Button>
                 </Link>
             </div>

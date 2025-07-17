@@ -5,10 +5,11 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
 
 import Container from '@/components/Container';
-import ProductForm from '@/components/ProductForm';
+import ProductForm from '@/components/product/ProductForm';
 import { fetchProductById, updateProduct } from '@/lib/services/productService';
 import { createDefaultProduct } from '@/lib/helpers/product';
 import { setNotification } from '@/store/notificationSlice';
+import { useTranslation } from 'react-i18next';
 
 import type { AppDispatch } from '@/store';
 import type { Product } from '@/types/product';
@@ -20,7 +21,8 @@ const EditProduct = () => {
 
     const [submitting, setSubmitting] = useState<boolean>(false);
     const [product, setProduct] = useState<Product>(createDefaultProduct());
-    const productId = searchParams.get('id');
+    const productId = searchParams.get('id') as string;
+    const { t } = useTranslation();
 
     useEffect( ()=> {
         const loadProduct = async () => {
@@ -32,7 +34,7 @@ const EditProduct = () => {
                 dispatch(
                     setNotification({
                         type: 'error',
-                        message: 'Failed to load product!',
+                        message: t('product.load_failed'),
                     })
                 );
                 router.push('/products');
@@ -50,7 +52,7 @@ const EditProduct = () => {
             dispatch(
                 setNotification({
                     type: 'success',
-                    message: 'Product updated successfully!',
+                    message: t('product.form_edit.success'),
                 })
             );
             router.push('/products');
@@ -58,7 +60,7 @@ const EditProduct = () => {
             dispatch(
                 setNotification({
                     type: 'error',
-                    message: 'Failed to update product!',
+                    message: t('product.form_edit.failed'),
                 })
             );
         } finally {
@@ -77,7 +79,7 @@ const EditProduct = () => {
     return (
         <Container>
             <ProductForm
-                type="Edit"
+                type={t('product.form_edit.title')}
                 product={product}
                 setProduct={setProduct}
                 submitting={submitting}
