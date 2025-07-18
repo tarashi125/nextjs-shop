@@ -5,14 +5,10 @@ import { NextRequest } from 'next/server';
 import { Types } from 'mongoose';
 import { NextResponse } from 'next/server';
 
-interface Params {
-    params: { id: string };
-}
-
-
-export async function GET(req: NextRequest, { params }: Params) {
+export async function GET(req: NextRequest) {
     await connectToDatabase();
-    const { id } = await params;
+    const url = new URL(req.url);
+    const id = url.pathname.split('/').pop();
 
     try {
         const order = await Order.findById(id)
@@ -34,9 +30,10 @@ export async function GET(req: NextRequest, { params }: Params) {
 }
 
 
-export async function PATCH(req: NextRequest, { params }: Params) {
+export async function PATCH(req: NextRequest) {
     await connectToDatabase();
-    const { id: orderId } = await params;
+    const url = new URL(req.url);
+    const orderId = url.pathname.split('/').pop() as string;
 
     try {
         // 1. Update order (title, description, total...)
@@ -92,9 +89,10 @@ export async function PATCH(req: NextRequest, { params }: Params) {
 }
 
 
-export async function DELETE(req: NextRequest, { params }: Params) {
+export async function DELETE(req: NextRequest) {
     await connectToDatabase();
-    const { id } = await params;
+    const url = new URL(req.url);
+    const id = url.pathname.split('/').pop();
 
     try {
         // 1. Delete order items

@@ -4,16 +4,10 @@ import Product from '@/models/Product';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
-
-interface Params {
-    params: {
-        id: string;
-    };
-}
-
-export async function GET(req: NextRequest, { params }: Params) {
+export async function GET(req: NextRequest) {
     await connectToDatabase();
-    const { id } = await params;
+    const url = new URL(req.url);
+    const id = url.pathname.split('/').pop();
 
     try {
         const product = await Product.findById(id);
@@ -26,9 +20,10 @@ export async function GET(req: NextRequest, { params }: Params) {
     }
 }
 
-export async function PATCH(req: NextRequest, { params }: Params) {
+export async function PATCH(req: NextRequest) {
     await connectToDatabase();
-    const { id } = await params;
+    const url = new URL(req.url);
+    const id = url.pathname.split('/').pop();
 
     try {
         const data = await req.json();
@@ -44,9 +39,10 @@ export async function PATCH(req: NextRequest, { params }: Params) {
     }
 }
 
-export async function DELETE(req: NextRequest, { params }: Params) {
+export async function DELETE(req: NextRequest) {
     await connectToDatabase();
-    const { id } = await params;
+    const url = new URL(req.url);
+    const id = url.pathname.split('/').pop();
 
     try {
         const deleted = await Product.findByIdAndDelete(id);
