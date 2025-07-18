@@ -7,7 +7,7 @@ export const orderStatus: OrderStatus[] = [
     'trash',
 ]
 
-export const getStatusColor = (status) => {
+export const getStatusColor = (status: string) => {
     switch (status) {
         case 'processing':
             return 'green';
