@@ -19,8 +19,8 @@ import {
   RollbackOutlined,
 } from '@ant-design/icons';
 import { fetchOrders, updateOrder } from '@/lib/services/orderService';
+import { notify } from '@/lib/helpers/notification';
 import { useDispatch } from 'react-redux';
-import { setNotification } from '@/store/notificationSlice';
 import { getStatusColor } from '@/constants/defaults';
 import { useTranslation } from 'react-i18next';
 
@@ -47,8 +47,6 @@ const OrdersPage = () => {
         const data = await fetchOrders(params);
         setOrders(data);
         setLoading(false);
-
-        console.log(data)
     };
 
     useEffect(()=> {
@@ -58,40 +56,20 @@ const OrdersPage = () => {
     const handleDeleteOrder = async (id: string) => {
         try {
             await updateOrder(id, { status: 'trash' });
-            dispatch(
-                setNotification({
-                    type: 'success',
-                    message: t('order.form_delete.success'),
-                })
-            );
+            notify(dispatch, t, 'success', 'order.form_delete.success');
             loadOrders();
         } catch {
-            dispatch(
-                setNotification({
-                    type: 'error',
-                    message: t('order.form_delete.success'),
-                })
-            );
+            notify(dispatch, t, 'error', 'order.form_delete.failed');
         }
     };
 
     const handleRestoreOrder = async (id: string) => {
         try {
             await updateOrder(id, { status: 'processing' });
-            dispatch(
-                setNotification({
-                    type: 'success',
-                    message: t('order.form_restore.success'),
-                })
-            );
+            notify(dispatch, t, 'success', 'order.form_restore.success');
             loadOrders();
         } catch {
-            dispatch(
-                setNotification({
-                    type: 'error',
-                    message: t('order.form_restore.failed'),
-                })
-            );
+            notify(dispatch, t, 'error', 'order.form_restore.failed');
         }
     };
     

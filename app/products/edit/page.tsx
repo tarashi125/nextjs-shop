@@ -8,7 +8,7 @@ import Container from '@/components/Container';
 import ProductForm from '@/components/product/ProductForm';
 import { fetchProductById, updateProduct } from '@/lib/services/productService';
 import { createDefaultProduct } from '@/lib/helpers/product';
-import { setNotification } from '@/store/notificationSlice';
+import { notify } from '@/lib/helpers/notification';
 import { useTranslation } from 'react-i18next';
 
 import type { AppDispatch } from '@/store';
@@ -31,12 +31,7 @@ const EditProduct = () => {
                 const data = await fetchProductById(productId);
                 setProduct(data);
             } catch (err) {
-                dispatch(
-                    setNotification({
-                        type: 'error',
-                        message: t('product.load_failed'),
-                    })
-                );
+                notify(dispatch, t, 'error', 'product.load_failed');
                 router.push('/products');
             }
         };
@@ -49,20 +44,10 @@ const EditProduct = () => {
         try {
             if (!productId) return;
             await updateProduct(productId, product);
-            dispatch(
-                setNotification({
-                    type: 'success',
-                    message: t('product.form_edit.success'),
-                })
-            );
+            notify(dispatch, t, 'success', 'product.form_edit.success');
             router.push('/products');
         } catch (error) {
-            dispatch(
-                setNotification({
-                    type: 'error',
-                    message: t('product.form_edit.failed'),
-                })
-            );
+            notify(dispatch, t, 'error', 'product.form_edit.failed');
         } finally {
             setSubmitting(false);
         }

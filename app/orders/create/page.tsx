@@ -7,10 +7,10 @@ import { useSession } from 'next-auth/react';
 
 import Container from '@/components/Container';
 import OrderForm from '@/components/order/OrderForm';
-import { setNotification } from '@/store/notificationSlice';
 import { fetchProduct } from '@/lib/services/productService';
 import { createOrder } from '@/lib/services/orderService';
 import { createDefaultOrder } from '@/lib/helpers/order';
+import { notify } from '@/lib/helpers/notification';
 import { useTranslation } from 'react-i18next';
 
 import type { AppDispatch } from '@/store';
@@ -38,12 +38,7 @@ const CreateOrder = () => {
     const handleCreateOrder = async () => {
         setSubmitting(true);
         if (!session?.user?.id) {
-            dispatch(
-                setNotification({
-                    type: 'error',
-                    message: t('order.form_create.login'),
-                })
-            );
+            notify(dispatch, t, 'error', 'order.form_create.login');
             return;
         }
 
@@ -62,20 +57,10 @@ const CreateOrder = () => {
 
         try {
             await createOrder(orderData);
-            dispatch(
-                setNotification({
-                    type: 'success',
-                    message: t('order.form_create.success'),
-                })
-            );
-            router.push('/orders');
+            notify(dispatch, t, 'success', 'order.form_create.success');
+            router.push('/');
         } catch (error) {
-            dispatch(
-                setNotification({
-                    type: 'error',
-                    message: t('order.form_create.failed'),
-                })
-            );
+            notify(dispatch, t, 'error', 'order.form_create.failed');
         } finally {
             setSubmitting(false);
         }

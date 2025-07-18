@@ -8,7 +8,7 @@ import Container from '@/components/Container';
 import CategoryForm from '@/components/category/CategoryForm';
 import { createCategory } from '@/lib/services/categoryService';
 import { createDefaultCategory } from '@/lib/helpers/category';
-import { setNotification } from '@/store/notificationSlice';
+import { notify } from '@/lib/helpers/notification';
 import { useTranslation } from 'react-i18next';
 
 import type { AppDispatch } from '@/store';
@@ -25,21 +25,10 @@ const CreateCategory = () => {
         setSubmitting(true);
         try {
             await createCategory(category);
-            dispatch(
-                setNotification({
-                    type: 'success',
-                    message: t('category.form_create.success'),
-                })
-            );
+            notify(dispatch, t, 'success', 'category.form_create.success');
             router.push('/category');
         } catch (error: any) {
-            dispatch(
-                setNotification({
-                    type: 'error',
-                    message: t('category.form_create.failed'),
-                    description: error?.message ||'',
-                })
-            );
+            notify(dispatch, t, 'error', 'category.form_create.failed');
         } finally {
             setSubmitting(false);
         }

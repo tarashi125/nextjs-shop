@@ -7,19 +7,18 @@ import { useTranslation } from 'react-i18next';
 
 const LanguageSwitcher = () => {
     const { t } = useTranslation('common');
-    const [enabled, setEnabled] = useState(false);
+    const [enabled, setEnabled] = useState<boolean | null>(null);
 
     useEffect(() => {
-        const current = i18n.language === 'en';
-        setEnabled(current);
-        const handler = (lng: string) => setEnabled(lng === 'en');
-        i18n.on('languageChanged', handler);
-        return () => void i18n.off('languageChanged', handler);
+        setEnabled(i18n.language === 'en');
     }, []);
 
     const onChange = (checked: boolean) => {
         i18n.changeLanguage(checked ? 'en' : 'vi');
+        setEnabled(checked);
     };
+
+    if (enabled === null) return null;
 
     return (
         <div
@@ -36,6 +35,6 @@ const LanguageSwitcher = () => {
             />
         </div>
     );
-}
+};
 
 export default LanguageSwitcher;

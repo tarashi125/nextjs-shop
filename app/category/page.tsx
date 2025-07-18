@@ -5,8 +5,8 @@ import { useDispatch } from 'react-redux';
 import Link from 'next/link';
 
 import Container from '@/components/Container';
-import { setNotification } from '@/store/notificationSlice';
 import { fetchCategory, deleteCategory } from '@/lib/services/categoryService';
+import { notify } from '@/lib/helpers/notification';
 import { DeleteOutlined, EditOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 
@@ -34,20 +34,10 @@ const CategoryPage = () => {
     const handleDeleteCategory = async (id: string) => {
         try {
             await deleteCategory(id);
-            dispatch(
-                setNotification({
-                    type: 'success',
-                    message: t('category.form_delete.success'),
-                })
-            );
+            notify(dispatch, t, 'success', 'category.form_delete.success');
             loadCategory();
         } catch {
-            dispatch(
-                setNotification({
-                    type: 'error',
-                    message: t('category.form_delete.failed'),
-                })
-            );
+            notify(dispatch, t, 'error', 'category.form_delete.failed');
         }
     };
 

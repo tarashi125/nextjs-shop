@@ -4,10 +4,10 @@ import Container from '@/components/Container';
 import OrderForm from '@/components/order/OrderForm';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useDispatch } from 'react-redux';
-import { setNotification } from '@/store/notificationSlice';
 import { fetchOrderById, updateOrder } from '@/lib/services/orderService';
 import { fetchProduct } from '@/lib/services/productService';
 import { createDefaultOrder } from '@/lib/helpers/order';
+import { notify } from '@/lib/helpers/notification';
 import { useTranslation } from 'react-i18next';
 
 import type { AppDispatch } from '@/store';
@@ -32,12 +32,7 @@ const EditOrder = () => {
                 const data = await fetchProduct();
                 setProducts(data);
             } catch {
-                dispatch(
-                    setNotification({
-                        type: 'error',
-                        message: t('order.load_failed_product')
-                    })
-                );
+                notify(dispatch, t, 'error', 'order.load_failed_product');
             }
         };
         loadProducts();
@@ -53,21 +48,18 @@ const EditOrder = () => {
             try {
                 if (!orderId) return;
                 const data = await fetchOrderById(orderId);
+                console.log(data)
                 const normalized: Order = {
                     ...data,
                     items: normalizeItems(data.items || []),
                 };
                 setOrder(normalized);
             } catch (err) {
-                dispatch(
-                    setNotification({
-                        type: 'error',
-                        message: t('order.load_failed'),
-                    })
-                );
+                notify(dispatch, t, 'error', 'order.load_failed');
                 router.push('/orders');
             }
         };
+        loadOrder();
     }, [orderId, dispatch, router]);
 
     const handleEditOrder = async () => {
@@ -85,20 +77,10 @@ const EditOrder = () => {
                 items: itemsWithName,
             });
 
-            dispatch(
-                setNotification({
-                    type: 'success',
-                    message: t('order.form_edit.success'),
-                })
-            );
+            notify(dispatch, t, 'success', 'order.form_edit.success');
             router.push('/orders');
         } catch {
-            dispatch(
-                setNotification({
-                    type: 'error',
-                    message: t('order.form_edit.success'),
-                })
-            );
+            notify(dispatch, t, 'error', 'order.form_edit.failed');
         } finally {
             setSubmitting(false);
         }

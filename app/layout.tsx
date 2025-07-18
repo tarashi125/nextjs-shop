@@ -1,7 +1,7 @@
 
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import Provider from '@/components/Provider';
-import ClientLayout from '@/app/ClientLayout';
+import Nav from '@/components/Nav';
 import type { Metadata } from 'next';
 import '@/styles/global.css';
 import '@ant-design/v5-patch-for-react-19';
@@ -21,7 +21,8 @@ const RootLayout = async ({ children }: { children: React.ReactNode }) => {
             <body>
                 <AntdRegistry>
                     <Provider session={session}>
-                        <ClientLayout>{children}</ClientLayout>
+                        <Nav />
+                        <main className="pt-[100px] min-h-screen">{children}</main>
                     </Provider>
                 </AntdRegistry>
             </body>

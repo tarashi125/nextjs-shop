@@ -6,9 +6,9 @@ import { useDispatch } from 'react-redux';
 
 import Container from "@/components/Container";
 import ProductForm from "@/components/product/ProductForm";
-import { setNotification } from '@/store/notificationSlice';
 import { createProduct } from '@/lib/services/productService'
 import { createDefaultProduct } from '@/lib/helpers/product';
+import { notify } from '@/lib/helpers/notification';
 import { useTranslation } from 'react-i18next';
 
 import type { AppDispatch } from '@/store';
@@ -25,22 +25,10 @@ const CreateProduct = () => {
         setSubmitting(true);
         try {
             await createProduct(product);
-            dispatch(
-                setNotification({
-                    type: 'success',
-                    message: t('product.form_create.success'),
-                    description: '',
-                })
-            );
+            notify(dispatch, t, 'success', 'product.form_create.success');
             router.push('/products');
         } catch (error) {
-            dispatch(
-                setNotification({
-                    type: 'error',
-                    message: t('product.form_create.failed'),
-                    description: '',
-                })
-            );
+            notify(dispatch, t, 'error', 'product.form_create.failed');
         } finally {
             setSubmitting(false);
         }

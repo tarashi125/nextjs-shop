@@ -8,7 +8,7 @@ import Container from '@/components/Container';
 import CategoryForm from '@/components/category/CategoryForm';
 import { fetchCategoryById, updateCategory } from '@/lib/services/categoryService';
 import { createDefaultCategory } from '@/lib/helpers/category';
-import { setNotification } from '@/store/notificationSlice';
+import { notify } from '@/lib/helpers/notification';
 import { useTranslation } from 'react-i18next';
 
 import type { AppDispatch } from '@/store';
@@ -32,12 +32,7 @@ const EditCategory = () => {
                 const data = await fetchCategoryById(categoryId);
                 setCategory(data);
             } catch {
-                dispatch(
-                    setNotification({
-                        type: 'error',
-                        message: t('category.load_failed'),
-                    })
-                );
+                notify(dispatch, t, 'error', 'category.load_failed');
                 router.push('/category');
             } finally {
                 setSubmitting(false);
@@ -50,21 +45,10 @@ const EditCategory = () => {
     const handleEditCategory = async () => {
         try {
             await updateCategory(categoryId, category);
-            dispatch(
-                setNotification({
-                    type: 'success',
-                    message: t('category.form_edit.success')
-                })
-            );
+            notify(dispatch, t, 'success', 'category.form_edit.success');
             router.push('/category');
         } catch (error: any) {
-            dispatch(
-                setNotification({
-                    type: 'error',
-                    message: t('category.form_edit.failed'),
-                    description: error?.message || '',
-                })
-            );
+            notify(dispatch, t, 'error', 'category.form_edit.failed');
         }
     };
 

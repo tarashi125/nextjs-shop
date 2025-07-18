@@ -7,9 +7,9 @@ import { Table, Button, Select, Popconfirm } from 'antd';
 import { DeleteOutlined, EditOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 
 import Container from '@/components/Container';
-import { setNotification } from '@/store/notificationSlice';
 import { fetchProduct } from '@/lib/services/productService';
 import { fetchCategory } from '@/lib/services/categoryService';
+import { notify } from '@/lib/helpers/notification';
 import { formatCurrency } from '@/lib/utils';
 import { useTranslation } from 'react-i18next';
 
@@ -60,22 +60,10 @@ const ProductsPage = () => {
         try {
             const res = await fetch(`/api/products/${id}`, { method: 'DELETE' });
             if (!res.ok) throw new Error();
-            dispatch(
-                setNotification({
-                    type: 'success',
-                    message: t('product.form_delete.success'),
-                    description: '',
-                })
-            );
+            notify(dispatch, t, 'success', 'product.form_delete.success');
             loadProducts();
         } catch {
-            dispatch(
-                setNotification({
-                    type: 'error',
-                    message: t('product.form_delete.failed'),
-                    description: '',
-                })
-            );
+            notify(dispatch, t, 'error', 'product.form_delete.failed');
         }
     };
 
