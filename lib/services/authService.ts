@@ -1,5 +1,5 @@
 import { connectToDatabase } from '@/lib/mongodb';
-import User from '@/models/User';
+import User, { IUser } from '@/models/User';
 import bcrypt from 'bcryptjs';
 
 interface Credentials {
@@ -16,8 +16,8 @@ interface AuthenticatedUser {
 export const authorizeUser = async ( credentials: Credentials ): Promise<AuthenticatedUser | null> => {
     await connectToDatabase();
 
-    const user = await User.findOne({ username: credentials.username }).lean();
-    if (!user) return null;
+    const user = await User.findOne({ username: credentials.username }).select('+password') as IUser;
+    if (!user || !user.password) return null;
 
     const isMatch = await bcrypt.compare(credentials.password, user.password);
     if (!isMatch) return null;
